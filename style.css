@@ -1,0 +1,39 @@
+html {
+	background-color : rgb(144, 238, 144);
+}
+
+.title {
+	text-align : center;
+}
+  
+.container {
+	width : 320px;
+	background-color : white;
+	margin : 80px, auto;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+.container table {
+	width : 100%;
+	
+}
+
+.container td {
+	width : 25%;
+	background-color : white;
+}
+
+.container button {
+        width: 100%;
+        height: 70px;
+        font-size: 24px;
+        background-color: white;
+        border: none;
+}
+
+.container #input {
+	padding-top : 30px;
+	font-size : 50px;
+}
+
