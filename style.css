@@ -1,10 +1,24 @@
+/* Digital Calculator Page */
 html {
 	background-color : rgb(144, 238, 144);
 }
 
 .title {
 	text-align : center;
+	font-style : italic;
 }
+
+.title h1 {
+	font-family : "Times new Romans", Times, serif;
+	
+}
+
+.links {
+	float : right;
+	padding-right : 20px;
+	font-family : "Times new Romans", Times, serif;
+	font-style : italic;
+} 
   
 .container {
 	width : 320px;
@@ -25,15 +39,60 @@ html {
 }
 
 .container button {
-        width: 100%;
-        height: 70px;
-        font-size: 24px;
-        background-color: white;
-        border: none;
+    width: 100%;
+    height: 70px;
+    font-size: 24px;
+    background-color: white;
+    border: none;
 }
 
 .container #input {
 	padding-top : 30px;
 	font-size : 50px;
 }
+
+
+/* Derivative Calculator page */
+
+.title_derivatives {
+	text-align : center;
+	font-style : italic;
+	padding-left : 70px;
+}
+
+.derivative_calculator {
+	display: box;
+	text-align : center;
+	margin-left : auto;
+	margin-right : auto;
+	width : 320px;
+	padding-bottom : 100px;
+}
+
+.links_derivative {
+	float : right;
+	padding-top : 50px;
+	font-style : italic;
+}
+
+.container_derivative {
+	width : 320px;
+	background-color : white;
+	margin : 80px, auto;
+	margin-left : auto;
+	margin-right : auto;
+	border : none;
+	height : 50px;
+}
+
+.container table {
+	width : 100%;
+}
+
+.container td {
+	width : 25%;
+}
+
+
+
 

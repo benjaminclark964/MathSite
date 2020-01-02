@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+		<script>
+			mocha.setup('bdd'); // minimal setup
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+		<script>
+			// chai has a lot of stuff, let's make assert global
+			let assert = chai.assert;
+		</script>
+		
+		
+		
+		<div class="links_derivative">
+			<a href="index.html">Calculator</a>
+		</div>
+		
+		<div class="title_derivatives">
+			<h1>Derivative Calculator<h1>
+		</div>
+		
+	</head>
+	
+	<body>
+	
+		<div class="derivative_calculator">
+			<p>Enter equation here: ^ for exponent</p>
+			<input type="submit" value="solve" onclick="calcDerivative(equation);"></input>
+			<input type="text" id="equation"></input>
+		</div>
+		
+		<div class="container_derivative">
+			<table border="0" cellspacing="0">
+				<tr>
+					<td colspan="4" id="output" type="text">|</td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+	
+	<script>
+		var results = document.getElementById('output');
+		
+		function calcDerivative(obj) {
+			var input = [];
+			input = $(obj).val();
+			
+			if(input.length == 1){
+				calcSingleDigitorLetterDerivative(input);
+				
+			} else {
+			
+				if(input.indexOf('^') > -1){
+					results.innerHTML = calcDerivativeWithExponent(input);
+					
+				} else {
+					results.innerHTML = input[0];
+				}	
+			}
+		}
+		
+		function calcSingleDigitorLetterDerivative(input) {
+			if(isNaN(input)){
+					results.innerHTML = '1';
+				} else {
+					results.innerHTML = '0';
+				}
+		}
+		
+		function calcDerivativeWithExponent(input) {
+			var output = [];
+			
+			var calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
+			output[0] = calc_deriv;
+			var numberLength = output[0];
+			
+			for(let i = String(numberLength).length; i < input.length; i++) {
+				if(input[i] == '^'){
+					if(Number(input[i+1]) > 2){
+						output[0] += input[i];
+						output[0] += Number(input[i+1] - 1);
+					}
+					break;
+				} else {
+					output[0] += input[i];
+				}
+						
+			}
+			return output;
+		}
+		
+		function getFirstNumber(input) {
+			var output = [];
+			
+			for(let i = 0; i < input.length; i++) {
+				if(!isNaN(input[i])) {
+					if(i == 0){
+						output[0] = input[i];
+					} else {
+						output[0] += input[i];
+					}
+				} else {
+					break;
+				}
+			}
+			
+			return output;
+		}
+		
+		function exponentIndex(input) {
+			let index = 1;
+			
+			for(let i = 0; i < input.length; i++) {
+				if(!isNaN(input[i])) {
+					if(i == 0){
+						index++;
+					} else {
+						index++;
+					}
+				} else {
+					index++;
+					break;
+				}
+			}
+			
+			return index;
+		}
+		 
+	</script>
+	
+	<script>
+		function testDerivatives(x) {
+			var ret;
+			var input = [];
+			input[0] = x;
+			
+			if(input.length == 1){
+				
+				if(isNaN(input)){
+					ret = '1';
+				} else {
+					ret = '0';
+				}
+				
+			} else {
+				if(input.indexOf('^') > -1) {
+					var output = [];
+				}
+				ret = input;
+			}
+			
+			return ret;
+		}
+	</script>
+	
+	<!-- the script with tests (describe, it...) -->
+	<script src="tests.js"></script>
+
+	<!-- the element with id="mocha" will contain test results -->
+	<div id="mocha"></div>
+
+	<!-- run tests! -->
+	<script>
+		mocha.run();
+	</script>
+</html>
