@@ -1,10 +1,8 @@
 var results = document.getElementById('output');
 		
-function calcDerivative(inp) {
+function calcDerivative(x) {
 	var input = [];
-	var testInput = [];
-	testInput = inp;
-	input = $(inp).val();
+	input = $(x).val();
 	
 	if(input.length == 1){
 		calcSingleDigitorLetterDerivative(input);
@@ -99,10 +97,20 @@ function calcDerivativeEquationWithNoExponent(input) {
 				|| i == (input.length - 1)) {
 				
 				if(checkForVariable(input[i]) == true) {
+					if(isNaN(input[i-1])) {
+						output[0] += '+1';
+						i++;
+						continue;
+					} 
 					continue;
 				} else {
+					
 					if((i+2) == input.length) {
 						continue;
+						
+					} else if(checkForVariable(input[i+2]) == false || (String(output[0]).indexOf('undefined') > -1 && i > 0)) {
+						continue;
+						
 					} else {
 						output[0] += input[i];
 					}
@@ -110,6 +118,21 @@ function calcDerivativeEquationWithNoExponent(input) {
 				}
 				
 			} else {
+				
+				//refactor later into function for variables in equation
+				if(isNaN(input[i-1])) {
+					if(output[0] == undefined){
+						output[0] = '1';
+						i++;
+						continue;
+					} else {
+						output[0] += '+1';
+						i++;
+						continue;
+					}
+				}
+				
+				//if variable next to a number
 				continue;
 			}
 		} else {
@@ -121,7 +144,7 @@ function calcDerivativeEquationWithNoExponent(input) {
 					output[0] += input[i];
 				}
 			} else {
-				i++;
+				//i++;
 				continue;
 			}
 			
@@ -161,6 +184,14 @@ function getFirstNumber(input) {
 	}
 	
 	return output;
+}
+
+function checkSingleVariableInEquation(input, index) {
+	let flag = false;
+	if(isNaN(input[index-1])) {
+		let flag = true;
+	}
+	return flag;
 }
 
 function exponentIndex(input) {
