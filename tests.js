@@ -110,5 +110,85 @@ describe("Derivatives of basic equations", function() {
 		equa = ['x', '+', 'x', '+', 'x'];
 		assert.equal(testCalcDerivative(equa), '1+1+1');
 	});
+	
+	it("Calculate the derivative of x+2x", function() {
+		equa = ['x', '+','2', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+2');
+	});
+	
+	it("Calculate the derivative of x+2x+2x", function() {
+		equa = ['x', '+','2', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+2+2');
+	});
+	
+	it("Calculate the derivative of 2x+x+2x", function() {
+		equa = ['2', 'x', '+', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+1+2');
+	});
+	
+	it("Calculate the derivative of 2x+2x+x", function() {
+		equa = ['2', 'x', '+', '2', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+2+1');
+	});
+	
+	it("Calculate the derivative of 2x+2x+x", function() {
+		equa = ['x', '+', '2', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+2+1');
+	});
+	
+	it("Calculate the derivative of 2x+x+x+2x", function() {
+		equa = ['2', 'x', '+', 'x', '+', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+1+1+2');
+	});
+	
+	it("Calculate the derivative of x+x+x+x", function() {
+		equa = ['x', '+', 'x', '+', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+1+1+1');
+	});
+	
+	it("Calculate the derivative of 2x+x+x+x", function() {
+		equa = ['2', 'x', '+', 'x', '+', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+1+1+1');
+	});
+	
+	it("Calculate the derivative of 2x+2x+x+x", function() {
+		equa = ['2', 'x', '+', '2', 'x', '+', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+2+1+1');
+	});
+	
+	it("Calculate the derivative of 2x+2x+2x+x", function() {
+		equa = ['2', 'x', '+', '2', 'x', '+', '2', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+2+2+1');
+	});
+	
+	it("Calculate the derivative of x+2x+2x+x", function() {
+		equa = ['x', '+', '2', 'x', '+', '2', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+2+2+1');
+	});
+	
+	it("Calculate the derivative of x+x+2x+x", function() {
+		equa = ['x', '+', 'x', '+', '2', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+1+2+1');
+	});
+	
+	it("Calculate the derivative of x+x+x+2x", function() {
+		equa = ['x', '+', 'x', '+', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+1+1+2');
+	});
+	
+	it("Calculate the derivative of 2x+2x+x+2x", function() {
+		equa = ['2', 'x', '+', '2', 'x', '+', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+2+1+2');
+	});
+	
+	it("Calculate the derivative of x+2x+x+2x", function() {
+		equa = ['x', '+', '2', 'x', '+', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+2+1+2');
+	});
+	
+	it("Calculate the derivative of 2x+x+2x+x", function() {
+		equa = ['2', 'x', '+', 'x', '+', '2', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+1+2+1');
+	});
 });
 

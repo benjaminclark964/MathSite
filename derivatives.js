@@ -1,4 +1,5 @@
 var results = document.getElementById('output');
+
 		
 function calcDerivative(x) {
 	var input = [];
@@ -18,6 +19,7 @@ function calcDerivative(x) {
 	}
 }
 
+
 function calcSingleDigitorLetterDerivative(input) {
 	if(isNaN(input)){
 			results.innerHTML = '1';
@@ -25,6 +27,7 @@ function calcSingleDigitorLetterDerivative(input) {
 			results.innerHTML = '0';
 		}
 }
+
 
 function calcDerivativeWithExponent(input) {
 	var output = [];
@@ -47,6 +50,7 @@ function calcDerivativeWithExponent(input) {
 	}
 	return output;
 }
+
 
 function getEquation(input) {
 	var output = [];
@@ -85,6 +89,8 @@ function getEquation(input) {
 function calcDerivativeEquationWithNoExponent(input) {
 	var output = [];
 	var variableFlag = false;
+	var operatorFlag = false;
+	var variableInBetweenFlag = false;
 	
 	for(let i = 0; i < input.length; i++) {
 		
@@ -109,6 +115,7 @@ function calcDerivativeEquationWithNoExponent(input) {
 						continue;
 						
 					} else if(checkForVariable(input[i+2]) == false || (String(output[0]).indexOf('undefined') > -1 && i > 0)) {
+						variableFlag = true;
 						continue;
 						
 					} else {
@@ -122,12 +129,24 @@ function calcDerivativeEquationWithNoExponent(input) {
 				//refactor later into function for variables in equation
 				if(isNaN(input[i-1])) {
 					if(output[0] == undefined){
-						output[0] = '1';
+						output[0] = '1+';
+						operatorFlag = true;
 						i++;
 						continue;
 					} else {
-						output[0] += '+1';
-						i++;
+						if(operatorFlag == false){
+							output[0] += '+1';
+							//i++;
+						} else {
+							if(variableFlag == true) {
+								output[0] += '+1';
+								variableFlag = false;
+							} else {
+								output[0] += '1';
+								operatorFlag = false;
+								//i++;
+							}
+						}
 						continue;
 					}
 				}
@@ -144,7 +163,6 @@ function calcDerivativeEquationWithNoExponent(input) {
 					output[0] += input[i];
 				}
 			} else {
-				//i++;
 				continue;
 			}
 			
@@ -152,6 +170,7 @@ function calcDerivativeEquationWithNoExponent(input) {
 	}
 return output;
 }
+
 
 function checkForVariable(input) {
 	let variableFlag = false;
@@ -167,6 +186,7 @@ function checkForVariable(input) {
 	}
 	return variableFlag;
 }
+
 
 function getFirstNumber(input) {
 	var output = [];
@@ -186,6 +206,7 @@ function getFirstNumber(input) {
 	return output;
 }
 
+
 function checkSingleVariableInEquation(input, index) {
 	let flag = false;
 	if(isNaN(input[index-1])) {
@@ -193,6 +214,7 @@ function checkSingleVariableInEquation(input, index) {
 	}
 	return flag;
 }
+
 
 function exponentIndex(input) {
 	let index = 1;
@@ -213,6 +235,7 @@ function exponentIndex(input) {
 	return index;
 }
 
+
 function delimitSpaces(input) {
 	var output = [];
 	var index = 0;
@@ -227,6 +250,7 @@ function delimitSpaces(input) {
 	}
 	return output;
 }
+
 
 function testCalcDerivative(inp) {
 	var input = [];
