@@ -22,22 +22,10 @@ function calcDerivative(x) {
 				expression = calcDerivativeEquationWithNoExponent(expression);
 			}
 			results.innerHTML += expression;
-			expression = [];
+			//expression = [];
 		}		
 	}
-	var check = results.innerHTML;
-	var newString = '';
-	var len = check.length;
-	if(check[len-1] == '+') {
-		for(let i = 0; i < len-1; i++) {
-			if(newString == '') {
-				newString = check[i];
-			} else {
-				newString += check[i];
-			}
-		}
-		results.innerHTML = newString;
-	}
+	assignProperResults();
 	arrayIndex = 0;
 }
 
@@ -60,9 +48,8 @@ function testCalcDerivative(inp) {
 			} else {
 				expression = calcDerivativeEquationWithNoExponent(expression);
 			}	
-			//alert(`array index ${arrayIndex} and ${input.length}`);
 			results.innerHTML += expression;
-			expression = [];
+			//expression = [];
 		}
 	}
 	assignProperResults();
@@ -171,38 +158,38 @@ function getExpression(input, index) {
 }
 
 
-function getEquation(input) {
-	var output = [];
-	var temp = [];
-	var outputIndex = 0;
+// function getEquation(input) {
+	// var output = [];
+	// var temp = [];
+	// var outputIndex = 0;
 	
-	for(let i = 0; i < input.length; i++) {
-		if(input[i] == '+' 
-		|| input[i] == '-' 
-		|| input[i] == '/' 
-		|| input[i] == '*'
-		|| i == (input.length - 1)) {
-			if(output[outputIndex] == undefined) {
-				output[outputIndex] = temp;
-			} else {
-				output[outputIndex] += temp;
-			}
+	// for(let i = 0; i < input.length; i++) {
+		// if(input[i] == '+' 
+		// || input[i] == '-' 
+		// || input[i] == '/' 
+		// || input[i] == '*'
+		// || i == (input.length - 1)) {
+			// if(output[outputIndex] == undefined) {
+				// output[outputIndex] = temp;
+			// } else {
+				// output[outputIndex] += temp;
+			// }
 			
-			output[outputIndex] += input[i];
-			outputIndex++;
-			temp = [];
-		} else {
-			// avoid undefined being added to the array;
-			if(temp[0] == undefined) {
-				temp[0] = input[i];
-			} else {
-				temp[0] += input[i];
-			}
+			// output[outputIndex] += input[i];
+			// outputIndex++;
+			// temp = [];
+		// } else {
+			// // avoid undefined being added to the array;
+			// if(temp[0] == undefined) {
+				// temp[0] = input[i];
+			// } else {
+				// temp[0] += input[i];
+			// }
 			
-		}
-	}
-	return output;
-}
+		// }
+	// }
+	// return output;
+// }
 
 
 function calcDerivativeEquationWithNoExponent(input) {
@@ -215,59 +202,45 @@ function calcDerivativeEquationWithNoExponent(input) {
 	for(let i = 0; i < input.length; i++) {
 		
 		if(input[i] == undefined) {
+			
 			continue;
+			
 		}
 		
 		if(isNaN(input[i])) {
 			
-			if(input[i] == '+' 
-				|| input[i] == '-' 
-				|| input[i] == '/' 
-				|| input[i] == '*'
-				|| i == (input.length - 1)) {
+			if(checkOperator(input, i) == true || checkIfEndOfLine(input, i)) {
 				
 				if(checkForVariable(input[i]) == true) {
+					
 					if(isNaN(input[i-1])) {
-						if(output[0] == undefined) {
-							output[0] = '1';
-						} else {
-							output[0] += '1';
-						}
-						
-						//i++;
+						output = addToOutputSingleVariableResults(output);
 						continue;
 					} 
+					
 					continue;
+					
 				} else {
 					
 					if((i+2) == input.length) {
+						
 						continue;
 						
 					} else if(checkForVariable(input[i+2]) == false || (String(output[0]).indexOf('undefined') > -1 && i > 0)) {
-						variableFlag = true;
-						if(input[i+2] == undefined) {
-							if(output[0] == undefined) {
-							//output[0] = input[i];
-							} else {
-								output[0] += input[i];
-							}
-							continue;
-						} else {
-							if(output[0] == undefined) {
-							output[0] = input[i];
-							} else {
-								output[0] += input[i];
-							}
-						}
 						
-						continue;
+						variableFlag = true;
+						
+						if(input[i+2] == undefined) {
+							
+							output = addToOutputIfOutputIsNotEmpty(output, input, i);
+							continue;
+							
+						} 
+						//	continue;
 						
 					} else {
-						if(output[0] == undefined) {
-							output[0] = input[i];
-						} else {
-							output[0] += input[i];
-						}
+						
+						output = addToOutput(output, input, i);
 						
 					}
 					
@@ -276,26 +249,39 @@ function calcDerivativeEquationWithNoExponent(input) {
 			} else {
 				
 				//refactor later into function for variables in equation
+				//output = addVariableResults(input, output, operatorFlag, vFlag, i);
 				if(isNaN(input[i-1])) {
+					
 					if(output[0] == undefined){
+						
 						output[0] = '1+';
 						operatorFlag = true;
 						i++;
 						continue;
+						
 					} else {
+						
 						if(operatorFlag == false){
+							
 							output[0] += '+1';
 							//i++;
+							
 						} else {
+							
 							if(variableFlag == true) {
+								
 								output[0] += '+1';
 								variableFlag = false;
+								
 							} else {
+								
 								output[0] += '1';
 								operatorFlag = false;
 								//i++;
+								
 							}
 						}
+						
 						continue;
 					}
 				}
@@ -303,21 +289,106 @@ function calcDerivativeEquationWithNoExponent(input) {
 				//if variable next to a number
 				continue;
 			}
+			
 		} else {
 		
 			if(checkForVariable(input[i+1]) == true) {
-				if(output[0] == undefined) {
-				output[0] = input[i];
-				} else {
-					output[0] += input[i];
-				}
+				
+				output = addToOutput(output, input, i);
+				
 			} else {
+				
 				continue;
+				
 			}
-			
 		}
 	}
+	
 return output;
+
+}
+
+
+function checkIfEndOfLine(input, index) {
+	var flag = false;
+	
+	if(index == input.length-1) {
+		flag = true;
+	}
+	
+	return flag;
+}
+
+function checkOperator(input, index) {
+	var flag = false;
+	
+	if(input[index] == '+' 
+	|| input[index] == '-' 
+	|| input[index] == '/' 
+	|| input[index] == '*') {
+			
+		flag = true;
+	}
+	
+	return flag;
+}
+
+
+// function addVariableResults(input, output, opFlag, vFlag, index) {
+	// if(isNaN(input[index-1])) {
+		// if(output[0] == undefined){
+			// output[0] = '1+';
+			// opFlag = true;
+			// index++;
+			// //continue;
+		// } else {
+			// if(opFlag == false){
+				// output[0] += '+1';
+				// //i++;
+			// } else {
+				// if(vFlag == true) {
+				// if(vFlag == true) {
+					// output[0] += '+1';
+					// vFlag = false;
+				// } else {
+					// output[0] += '1';
+					// opFlag = false;
+				// }
+			// }
+			// //continue;
+		// }
+	// }
+	// }
+// }
+
+
+function addToOutput(output, input, index) {
+	if(output[0] == undefined) {
+		output[0] = input[index];
+	} else {
+		output[0] += input[index];
+	}
+	return output;
+}
+
+
+function addToOutputIfOutputIsNotEmpty(output, input, index) {
+	if(output[0] != undefined) {
+		output[0] += input[index];
+	} 
+	
+	return output
+}
+
+
+function addToOutputSingleVariableResults(output) {
+	if(output[0] == undefined) {
+		output[0] = '1';
+	} else {
+		output[0] += '1';
+	}
+	
+	return output;
 }
 
 
@@ -399,3 +470,4 @@ function delimitSpaces(input) {
 	}
 	return output;
 }
+
