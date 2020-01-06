@@ -192,3 +192,11 @@ describe("Derivatives of basic equations", function() {
 	});
 });
 
+
+describe("Basic Derivatives with exponents in the equation", function() {
+	it("Derivative of 2x^2+2x^2", function() {
+		equa = ['2', 'x', '^', '2', '+', '2', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '4x+4x');
+	});
+});
+
