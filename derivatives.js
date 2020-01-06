@@ -167,15 +167,8 @@ function calcDerivativeWithExponent(input) {
 	for(let i = String(numberLength).length; i < input.length; i++) {
 		
 		if(input[i] == '^'){
-			
-			if(Number(input[i+1]) > 2){
-				
-				output[0] += input[i];
-				output[0] += Number(input[i+1] - 1);
-				
-			}
-			
-			break;
+			i++;
+			continue;
 			
 		} else {
 			
@@ -192,11 +185,13 @@ function calcDerivativeWithExponent(input) {
 function getExpression(input, index) {
 	
 	var output = [];
+	var outputIndex = 0;
 	
 	for(let i = index; i < input.length; i++) {
 		
 		if(isNaN(input[i]) && input[i] != '+') {
-			output[i] = input[i];
+			output[outputIndex] = input[i];
+			outputIndex++;
 			arrayIndex++;
 			continue;
 			
@@ -204,13 +199,15 @@ function getExpression(input, index) {
 		
 		if(input[i] == '+') {
 			
-			output[i] = input[i];
+			output[outputIndex] = input[i];
+			outputIndex++;
 			arrayIndex++;
 			break;
 			
 		} else {
 			
-			output[i] = input[i];
+			output[outputIndex] = input[i];
+			outputIndex++;
 			arrayIndex++;
 			
 		}
@@ -476,6 +473,10 @@ function exponentIndex(input) {
 	let index = 1;
 	
 	for(let i = 0; i < input.length; i++) {
+		
+		if(input[i] == undefined) {
+			continue;
+		}
 		
 		if(!isNaN(input[i])) {
 			
