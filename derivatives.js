@@ -3,87 +3,122 @@ var arrayIndex = 0;
 
 		
 function calcDerivative(x) {
-	results.innerHTML = '';
+	
 	var input = [];
 	var expression = [];
+	results.innerHTML = '';
 	input = $(x).val();
 	
 	if(input.length == 1){
+		
 		calcSingleDigitorLetterDerivative(input);
 		
 	} else {
+		
 		input = delimitSpaces(input);
+		
 		while(arrayIndex < input.length) {
+			
 			expression = getExpression(input, arrayIndex);
+			
 			if(input.indexOf('^') > -1){
+				
 				expression = calcDerivativeWithExponent(expression);
 				
 			} else {
+				
 				expression = calcDerivativeEquationWithNoExponent(expression);
+				
 			}
+			
 			results.innerHTML += expression;
-			//expression = [];
 		}		
 	}
+	
 	assignProperResults();
 	arrayIndex = 0;
 }
 
 function testCalcDerivative(inp) {
-	results.innerHTML = '';
+	
 	var input = [];
 	var expression = [];
+	results.innerHTML = '';
 	input = inp;
 	
 	if(input.length == 1){
+		
 		calcSingleDigitorLetterDerivative(input);
 		
 	} else {
+		
 		input = delimitSpaces(input);
+		
 		while(arrayIndex < input.length) {
+			
 			expression = getExpression(input, arrayIndex);
+			
 			if(expression.indexOf('^') > -1){
+				
 				expression= calcDerivativeWithExponent(expression);
 				
 			} else {
+				
 				expression = calcDerivativeEquationWithNoExponent(expression);
+				
 			}	
+			
 			results.innerHTML += expression;
 			//expression = [];
+			
 		}
 	}
+	
 	assignProperResults();
 	arrayIndex = 0;
+	
 	return results.innerHTML;
 }
 
 
 function assignProperResults() {
+	
 	var check = results.innerHTML;
 	var newString = '';
 	var len = check.length;
+	
 	if(operatorAtTheEndFlag(check, len) == true) {
+		
 		for(let i = 0; i < len-1; i++) {
+			
 			if(newString == '') {
+				
 				newString = check[i];
+				
 			} else {
+				
 				newString += check[i];
+				
 			}
 			
 		}
+		
 		results.innerHTML = newString;
 	}	
 }
 
 
 function operatorAtTheEndFlag(input, len) {
+	
 	let returnFlag = false;
 	
 	if(input[len-1] == '+'
 	|| input[len-1] == '-'
 	|| input[len-1] == '/'
 	|| input[len-1] == '*') {
+		
 		returnFlag = true;
+		
 	}
 	
 	return returnFlag;
@@ -91,11 +126,15 @@ function operatorAtTheEndFlag(input, len) {
 
 
 function countExponents(input) {
+	
 	let exponentCount = 0;
 	
 	for(let i = 0; i < input.length; i++) {
+		
 		if(input[i] == '^') {
+			
 			exponentCount++;
+			
 		}
 	}
 	
@@ -104,15 +143,21 @@ function countExponents(input) {
 
 
 function calcSingleDigitorLetterDerivative(input) {
+	
 	if(isNaN(input)){
+		
 			results.innerHTML = '1';
+			
 		} else {
+			
 			results.innerHTML = '0';
+			
 		}
 }
 
 
 function calcDerivativeWithExponent(input) {
+	
 	var output = [];
 	
 	var calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
@@ -120,76 +165,59 @@ function calcDerivativeWithExponent(input) {
 	var numberLength = output[0];
 	
 	for(let i = String(numberLength).length; i < input.length; i++) {
+		
 		if(input[i] == '^'){
+			
 			if(Number(input[i+1]) > 2){
+				
 				output[0] += input[i];
 				output[0] += Number(input[i+1] - 1);
+				
 			}
+			
 			break;
+			
 		} else {
+			
 			output[0] += input[i];
+			
 		}
 				
 	}
+	
 	return output;
 }
 
 
 function getExpression(input, index) {
+	
 	var output = [];
+	
 	for(let i = index; i < input.length; i++) {
+		
 		if(isNaN(input[i]) && input[i] != '+') {
 			output[i] = input[i];
 			arrayIndex++;
 			continue;
+			
 		}
 		
 		if(input[i] == '+') {
+			
 			output[i] = input[i];
 			arrayIndex++;
 			break;
+			
 		} else {
+			
 			output[i] = input[i];
 			arrayIndex++;
+			
 		}
 	}
 	
 	return output;
 }
-
-
-// function getEquation(input) {
-	// var output = [];
-	// var temp = [];
-	// var outputIndex = 0;
-	
-	// for(let i = 0; i < input.length; i++) {
-		// if(input[i] == '+' 
-		// || input[i] == '-' 
-		// || input[i] == '/' 
-		// || input[i] == '*'
-		// || i == (input.length - 1)) {
-			// if(output[outputIndex] == undefined) {
-				// output[outputIndex] = temp;
-			// } else {
-				// output[outputIndex] += temp;
-			// }
-			
-			// output[outputIndex] += input[i];
-			// outputIndex++;
-			// temp = [];
-		// } else {
-			// // avoid undefined being added to the array;
-			// if(temp[0] == undefined) {
-				// temp[0] = input[i];
-			// } else {
-				// temp[0] += input[i];
-			// }
-			
-		// }
-	// }
-	// return output;
-// }
 
 
 function calcDerivativeEquationWithNoExponent(input) {
@@ -236,7 +264,6 @@ function calcDerivativeEquationWithNoExponent(input) {
 							continue;
 							
 						} 
-						//	continue;
 						
 					} else {
 						
@@ -249,7 +276,6 @@ function calcDerivativeEquationWithNoExponent(input) {
 			} else {
 				
 				//refactor later into function for variables in equation
-				//output = addVariableResults(input, output, operatorFlag, vFlag, i);
 				if(isNaN(input[i-1])) {
 					
 					if(output[0] == undefined){
@@ -264,7 +290,6 @@ function calcDerivativeEquationWithNoExponent(input) {
 						if(operatorFlag == false){
 							
 							output[0] += '+1';
-							//i++;
 							
 						} else {
 							
@@ -277,17 +302,18 @@ function calcDerivativeEquationWithNoExponent(input) {
 								
 								output[0] += '1';
 								operatorFlag = false;
-								//i++;
 								
 							}
 						}
 						
 						continue;
+						
 					}
 				}
 				
 				//if variable next to a number
 				continue;
+				
 			}
 			
 		} else {
@@ -305,15 +331,17 @@ function calcDerivativeEquationWithNoExponent(input) {
 	}
 	
 return output;
-
 }
 
 
 function checkIfEndOfLine(input, index) {
+	
 	var flag = false;
 	
 	if(index == input.length-1) {
+		
 		flag = true;
+		
 	}
 	
 	return flag;
@@ -328,53 +356,34 @@ function checkOperator(input, index) {
 	|| input[index] == '*') {
 			
 		flag = true;
+		
 	}
 	
 	return flag;
 }
 
 
-// function addVariableResults(input, output, opFlag, vFlag, index) {
-	// if(isNaN(input[index-1])) {
-		// if(output[0] == undefined){
-			// output[0] = '1+';
-			// opFlag = true;
-			// index++;
-			// //continue;
-		// } else {
-			// if(opFlag == false){
-				// output[0] += '+1';
-				// //i++;
-			// } else {
-				// if(vFlag == true) {
-				// if(vFlag == true) {
-					// output[0] += '+1';
-					// vFlag = false;
-				// } else {
-					// output[0] += '1';
-					// opFlag = false;
-				// }
-			// }
-			// //continue;
-		// }
-	// }
-	// }
-// }
-
-
 function addToOutput(output, input, index) {
 	if(output[0] == undefined) {
+		
 		output[0] = input[index];
+		
 	} else {
+		
 		output[0] += input[index];
+		
 	}
+	
 	return output;
 }
 
 
 function addToOutputIfOutputIsNotEmpty(output, input, index) {
+	
 	if(output[0] != undefined) {
+		
 		output[0] += input[index];
+		
 	} 
 	
 	return output
@@ -382,10 +391,15 @@ function addToOutputIfOutputIsNotEmpty(output, input, index) {
 
 
 function addToOutputSingleVariableResults(output) {
+	
 	if(output[0] == undefined) {
+		
 		output[0] = '1';
+		
 	} else {
+		
 		output[0] += '1';
+		
 	}
 	
 	return output;
@@ -393,33 +407,49 @@ function addToOutputSingleVariableResults(output) {
 
 
 function checkForVariable(input) {
+	
 	let variableFlag = false;
+	
 	if(input == '+' 
-		|| input == '-' 
-		|| input == '/' 
-		|| input == '*'
-		|| input == " "
-		|| input == undefined) {
+	|| input == '-' 
+	|| input == '/' 
+	|| input == '*'
+	|| input == " "
+	|| input == undefined) {
+		
+		//do nothing
 		
 	} else {
+		
 		variableFlag = true;
+		
 	}
+	
 	return variableFlag;
 }
 
 
 function getFirstNumber(input) {
+	
 	var output = [];
 	
 	for(let i = 0; i < input.length; i++) {
+		
 		if(!isNaN(input[i])) {
+			
 			if(i == 0){
+				
 				output[0] = input[i];
+				
 			} else {
+				
 				output[0] += input[i];
+				
 			}
 		} else {
+			
 			break;
+			
 		}
 	}
 	
@@ -428,27 +458,41 @@ function getFirstNumber(input) {
 
 
 function checkSingleVariableInEquation(input, index) {
+	
 	let flag = false;
+	
 	if(isNaN(input[index-1])) {
+		
 		let flag = true;
+		
 	}
+	
 	return flag;
 }
 
 
 function exponentIndex(input) {
+	
 	let index = 1;
 	
 	for(let i = 0; i < input.length; i++) {
+		
 		if(!isNaN(input[i])) {
+			
 			if(i == 0){
+				
 				index++;
+				
 			} else {
+				
 				index++;
+				
 			}
 		} else {
+			
 			index++;
 			break;
+			
 		}
 	}
 	
@@ -457,17 +501,24 @@ function exponentIndex(input) {
 
 
 function delimitSpaces(input) {
+	
 	var output = [];
 	var index = 0;
 	
 	for(let i = 0; i < input.length; i++) {
+		
 		if(input[i] == " ") {
+			
 			continue;
+			
 		} else {
+			
 			output[index] = input[i];
 			index++;
+			
 		}
 	}
+	
 	return output;
 }
 
