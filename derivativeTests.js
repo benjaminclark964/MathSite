@@ -42,6 +42,26 @@ describe("Derivatives of basic equations", function() {
 		assert.equal(testCalcDerivative(equa), '2');
 	});
 	
+	it("Calculate the derivative of 25x", function() {
+		equa = ['2', '5', 'x'];
+		assert.equal(testCalcDerivative(equa), '25');
+	});
+	
+	it("Calculate the derivative of 25x+200", function() {
+		equa = ['2', '5', 'x', '+', '2', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '25');
+	});
+	
+	it("Calculate the derivative of 200+25x+200", function() {
+		equa = ['2', '0', '0', '+', '2', '5', 'x', '+', '2', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '25');
+	});
+	
+	it("Calculate the derivative of 2x+20", function() {
+		equa = ['2', 'x', '+', '2', '0'];
+		assert.equal(testCalcDerivative(equa), '2');
+	});
+	
 	it("Calculate the derivative of 2x+2x", function() {
 		equa = ['2', 'x', '+', '2' , 'x'];
 		assert.equal(testCalcDerivative(equa), '2+2');
@@ -389,6 +409,11 @@ describe("Basic Derivatives with exponents in the equation", function() {
 	it("Derivative of x + 2 + 20x^20", function() {
 		equa = ['x', '+', '2', '+', '2', '0', 'x', '^', '2', '0'];
 		assert.equal(testCalcDerivative(equa), '1+400x^19');
+	});
+	
+	it("Derivative of 200x + 200 + 20x^20", function() {
+		equa = ['2', '0', '0', 'x', '+', '2' , '0', '0', '+', '2', '0', 'x', '^', '2', '0'];
+		assert.equal(testCalcDerivative(equa), '200+400x^19');
 	});
 });
 

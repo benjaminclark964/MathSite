@@ -2,12 +2,12 @@ var results = document.getElementById('output');
 var arrayIndex = 0;
 
 		
-function calcDerivative(x) {
+function calcDerivative(inp) {
 	
 	var input = [];
 	var expression = [];
 	results.innerHTML = '';
-	input = $(x).val();
+	input = $(inp).val();
 	
 	if(input.length == 1){
 		
@@ -203,6 +203,7 @@ function getExpression(input, index) {
 	var outputIndex = 0;
 	var exponentFlag = false;
 	var exponentNumberflag = false;
+	var numberFlag = false;
 	
 	for(let i = index; i < input.length; i++) {
 		
@@ -259,7 +260,25 @@ function getExpression(input, index) {
 				}
 			}
 			
-			output[outputIndex] = input[i];
+			//turning this [2, 0] into this [20]
+			if((String(input[i]).match(/^[0-9]{1}$/) != null && String(input[i+1]).match(/^[0-9]{1}$/) != null) || numberFlag == true) {
+				numberFlag = true;
+				if(output[outputIndex] == undefined) {
+					output[outputIndex] = input[i];
+				} else {
+					output[outputIndex] += input[i];
+				}
+				
+				if(String(input[i+1]).match(/^[0-9]{1}$/) == null) {
+					numberFlag = false;
+					outputIndex++;
+				}
+				arrayIndex++;
+				continue;
+			} else {
+				output[outputIndex] = input[i];
+			}
+			
 			outputIndex++;
 			arrayIndex++;
 			
