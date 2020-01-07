@@ -159,6 +159,7 @@ function calcSingleDigitorLetterDerivative(input) {
 function calcDerivativeWithExponent(input) {
 	
 	var output = [];
+	var exponentFlag = false;
 	
 	var calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
 	output[0] = calc_deriv;
@@ -166,9 +167,15 @@ function calcDerivativeWithExponent(input) {
 	
 	for(let i = String(numberLength).length; i < input.length; i++) {
 		
-		if(input[i] == '^'){
+		if(input[i] == '^' && Number(input[i+1]) == 2){
+			
 			i++;
 			continue;
+			
+		} else if(input[i] == '^' && Number(input[i+1]) > 2) {
+			
+			output[0] += input[i];
+			input[i+1] = Number(input[i+1]) - 1;
 			
 		} else {
 			
@@ -189,7 +196,7 @@ function getExpression(input, index) {
 	
 	for(let i = index; i < input.length; i++) {
 		
-		if(isNaN(input[i]) && input[i] != '+') {
+		if(isNaN(input[i]) && checkDoesNotEqualOperator(input, i) != true) {
 			output[outputIndex] = input[i];
 			outputIndex++;
 			arrayIndex++;
@@ -197,7 +204,7 @@ function getExpression(input, index) {
 			
 		}
 		
-		if(input[i] == '+') {
+		if(checkOperator(input, i) == true) {
 			
 			output[outputIndex] = input[i];
 			outputIndex++;
@@ -214,6 +221,22 @@ function getExpression(input, index) {
 	}
 	
 	return output;
+}
+
+function checkDoesNotEqualOperator(input, index) {
+	
+	var flag = false;
+	
+	if(input[index] != '+'
+	|| input[index] != '-'
+	|| input[index] != '/'
+	|| input[index] != '*') {
+		
+		flag = true;
+		
+	}
+	
+	return flag;
 }
 
 

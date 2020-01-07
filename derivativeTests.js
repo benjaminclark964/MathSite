@@ -194,9 +194,120 @@ describe("Derivatives of basic equations", function() {
 
 
 describe("Basic Derivatives with exponents in the equation", function() {
+	
+	it("Derivative of 2x^2", function() {
+		equa = ['2', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '4x');
+	});
+	
+	it("Derivative of 2x^2+2", function() {
+		equa = ['2', 'x', '^', '2', '+', '2'];
+		assert.equal(testCalcDerivative(equa), '4x');
+	});
+	
+	it("Derivative of 2x^2+2x", function() {
+		equa = ['2', 'x', '^', '2', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x+2');
+	});
+	
 	it("Derivative of 2x^2+2x^2", function() {
 		equa = ['2', 'x', '^', '2', '+', '2', 'x', '^', '2'];
 		assert.equal(testCalcDerivative(equa), '4x+4x');
+	});
+	
+	it("Derivative of 2x+2x^2", function() {
+		equa = [ '2', 'x', '+', '2', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '2+4x');
+	});
+	
+	it("Derivative of 2+2x^2", function() {
+		equa = [ '2', '+', '2', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '4x');
+	});
+	
+	it("Derivative of x+2x^2", function() {
+		equa = [ 'x', '+', '2', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '1+4x');
+	});
+	
+	it("Derivative of 2x^2+x", function() {
+		equa = ['2', 'x', '^', '2', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x+1');
+	});
+	
+	it("Derivative of 2x^2+x+x", function() {
+		equa = ['2', 'x', '^', '2', '+', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x+1+1');
+	});
+	
+	it("Derivative of 2x^2+x+x+x", function() {
+		equa = ['2', 'x', '^', '2', '+', 'x', '+', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x+1+1+1');
+	});
+	
+	it("Derivative of 2x^2+2x^2+x+x", function() {
+		equa = ['2', 'x', '^', '2', '+', '2', 'x', '^', '2', '+', 'x', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x+4x+1+1');
+	});
+	
+	it("Derivative of 1+2x+2x^2", function() {
+		equa = ['1', '+', '2', 'x', '+', '2', 'x', '^' ,'2'];
+		assert.equal(testCalcDerivative(equa), '2+4x');
+	});
+	
+	it("Derivative of x+2x+2x^2", function() {
+		equa = ['x', '+', '2', 'x', '+', '2', 'x', '^' ,'2'];
+		assert.equal(testCalcDerivative(equa), '1+2+4x');
+	});
+	
+	it("Derivative of x+2x^2-45x", function() {
+		equa = ['x', '+', '2', 'x', '^', '2', '-', '4', '5', 'x'];
+		assert.equal(testCalcDerivative(equa), '1+4x-45');
+	});
+	
+	it("Derivative of 21x+2x^2-45x", function() {
+		equa = ['2', '1', 'x', '+', '2', 'x', '^', '2', '-', '4', '5', 'x'];
+		assert.equal(testCalcDerivative(equa), '21+4x-45');
+	});
+	
+	it("Derivative of 21x^2", function() {
+		equa = ['2', '1', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '42x');
+	});
+	
+	it("Derivative of 21x^2+21x^2", function() {
+		equa = ['2', '1', 'x', '^', '2', '+', '2', '1', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '42x+42x');
+	});
+	
+	it("Derivative of 21x^2+21x^2+21x^2", function() {
+		equa = ['2', '1', 'x', '^', '2', '+', '2', '1', 'x', '^', '2', '+', '2', '1', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '42x+42x+42x');
+	});
+	
+	it("Derivative of 21x^2*21x^2*21x^2", function() {
+		equa = ['2', '1', 'x', '^', '2', '*', '2', '1', 'x', '^', '2', '*', '2', '1', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '42x*42x*42x');
+	});
+	
+	it("Derivative of 21x^2/21x^2/21x^2", function() {
+		equa = ['2', '1', 'x', '^', '2', '/', '2', '1', 'x', '^', '2', '/', '2', '1', 'x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '42x/42x/42x');
+	});
+	
+	it("Derivative of 21x^3", function() {
+		equa = ['2', '1', 'x', '^', '3'];
+		assert.equal(testCalcDerivative(equa), '63x^2');
+	});
+	
+	it("Derivative of 21x^3+x", function() {
+		equa = ['2', '1', 'x', '^', '3', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '63x^2+1');
+	});
+	
+	it("Derivative of 21x^3+2x", function() {
+		equa = ['2', '1', 'x', '^', '3', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '63x^2+2');
 	});
 });
 
