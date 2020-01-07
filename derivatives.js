@@ -204,6 +204,7 @@ function getExpression(input, index) {
 	var exponentFlag = false;
 	var exponentNumberflag = false;
 	var numberFlag = false;
+	var exponentIndex = 0;
 	
 	for(let i = index; i < input.length; i++) {
 		
@@ -228,6 +229,7 @@ function getExpression(input, index) {
 				
 				if(input[i-1] == '^') {
 					exponentFlag = true;
+					exponentIndex = i;
 				}
 				
 				if(!isNaN(input[i])) {
@@ -251,13 +253,19 @@ function getExpression(input, index) {
 					}
 					
 					arrayIndex++;
+					
+					// e.g. 2x^1 wil become 2x
+					output = ifExponentValueIsOne(input, output, exponentIndex);
+					
 					continue;
 					
 				} else {
 					
 					exponentFlag = false;
 					
+					
 				}
+				
 			}
 			
 			//turning this [2, 0] into this [20]
@@ -287,6 +295,23 @@ function getExpression(input, index) {
 	
 	return output;
 }
+
+
+function ifExponentValueIsOne(input, output, exponentIndex) {
+	if(output[exponentIndex] == '1' && String(input[exponentIndex+1]).match(/[0-9]/) == null) {
+		for(let i = exponentIndex-1; i < output.length; i++) {
+			if(checkOperator(output, i) == true) {
+				break;
+			} else {
+				delete output[i];
+			}
+			
+		}
+	}
+	
+	return output;
+}
+
 
 function checkDoesNotEqualOperator(input, index) {
 	

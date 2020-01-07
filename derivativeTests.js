@@ -6,6 +6,8 @@ let charA = 'a';
 let charZ = 'z';
 let equa = [];
 
+
+// Tests for single digits
 describe("Derivative of single digit", function() {
 	for(let i = 0; i < 10; i++){
 		test[0] = i;
@@ -16,6 +18,7 @@ describe("Derivative of single digit", function() {
 });
 
 
+// Tests for double digits
 describe("Derivative of double digit", function() {
 	for(let i = 0; i < 100; i++){
 		test[0] = i;
@@ -26,6 +29,7 @@ describe("Derivative of double digit", function() {
 });
 
 
+// Tests for a single letter
 describe("Derivative of single letter", function() {
 	let i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
 	for(; i <= j; i++){
@@ -36,6 +40,8 @@ describe("Derivative of single letter", function() {
 	}
 });
 
+
+// Tests for basic equations without exponent values
 describe("Derivatives of basic equations", function() {
 	it("Calculate the derivative of 2x+2", function() {
 		equa = ['2', 'x', '+', '2'];
@@ -224,6 +230,7 @@ describe("Derivatives of basic equations", function() {
 });
 
 
+// Tests for basic equations with exponent values
 describe("Basic Derivatives with exponents in the equation", function() {
 	
 	it("Derivative of 2x^2", function() {
@@ -414,6 +421,15 @@ describe("Basic Derivatives with exponents in the equation", function() {
 	it("Derivative of 200x + 200 + 20x^20", function() {
 		equa = ['2', '0', '0', 'x', '+', '2' , '0', '0', '+', '2', '0', 'x', '^', '2', '0'];
 		assert.equal(testCalcDerivative(equa), '200+400x^19');
+	});
+});
+
+
+// Tests trying to break my code
+describe("Trying to break my code", function() {
+	it("derivative of 2x^1", function() {
+		equa = ['2', 'x', '^', '1'];
+		assert.equal(testCalcDerivative(equa), '2');
 	});
 });
 
