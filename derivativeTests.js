@@ -15,6 +15,17 @@ describe("Derivative of single digit", function() {
 	}
 });
 
+
+describe("Derivative of double digit", function() {
+	for(let i = 0; i < 100; i++){
+		test[0] = i;
+		it(`Calculates derivative of ${i}`, function() {
+			assert.equal(testCalcDerivative(test), '0');
+		});
+	}
+});
+
+
 describe("Derivative of single letter", function() {
 	let i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
 	for(; i <= j; i++){
@@ -323,6 +334,61 @@ describe("Basic Derivatives with exponents in the equation", function() {
 	it("Derivative of 2x^10", function() {
 		equa = ['2', 'x', '^', '1', '0'];
 		assert.equal(testCalcDerivative(equa), '20x^9');
+	});
+	
+	it("Derivative of 2x^100", function() {
+		equa = ['2', 'x', '^', '1', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '200x^99');
+	});
+	
+	it("Derivative of 2x^1000", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '2000x^999');
+	});
+	
+	it("Derivative of 2x^1000 + 2x^1000", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', '2', 'x', '^', '1', '0', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+2000x^999');
+	});
+	
+	it("Derivative of 2x^1000 + 2x^1000 + x", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', '2', 'x', '^', '1', '0', '0', '0', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+2000x^999+1');
+	});
+	
+	it("Derivative of 2x^1000 + 2x^1000 + 20", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', '2', 'x', '^', '1', '0', '0', '0', '+', '20'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+2000x^999');
+	});
+	
+	it("Derivative of 2x^1000 + 20 + 2x^1000", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', '20', '+', '2', 'x', '^', '1', '0', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+2000x^999');
+	});
+	
+	it("Derivative of 2x^1000 + x + 2x^1000", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', 'x', '+', '2', 'x', '^', '1', '0', '0', '0'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+1+2000x^999');
+	});
+	
+	it("Derivative of 2x^1000 + x + 2x^1000 + x", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', 'x', '+', '2', 'x', '^', '1', '0', '0', '0', '+', 'x'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+1+2000x^999+1');
+	});
+	
+	it("Derivative of 2x^1000 + x + 2x^1000 + 2x", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', 'x', '+', '2', 'x', '^', '1', '0', '0', '0', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+1+2000x^999+2');
+	});
+	
+	it("Derivative of 2x^1000 + x + 2x^1000 + 25x", function() {
+		equa = ['2', 'x', '^', '1', '0', '0', '0', '+', 'x', '+', '2', 'x', '^', '1', '0', '0', '0', '+', '2', '5', 'x'];
+		assert.equal(testCalcDerivative(equa), '2000x^999+1+2000x^999+25');
+	});
+	
+	it("Derivative of x + 2 + 20x^20", function() {
+		equa = ['x', '+', '2', '+', '2', '0', 'x', '^', '2', '0'];
+		assert.equal(testCalcDerivative(equa), '1+400x^19');
 	});
 });
 
