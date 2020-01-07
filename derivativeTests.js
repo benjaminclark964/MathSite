@@ -309,5 +309,21 @@ describe("Basic Derivatives with exponents in the equation", function() {
 		equa = ['2', '1', 'x', '^', '3', '+', '2', 'x'];
 		assert.equal(testCalcDerivative(equa), '63x^2+2');
 	});
+	
+	it("Derivative of 21x^3+2x^4", function() {
+		equa = ['2', '1', 'x', '^', '3', '+', '2', 'x', '^', '4'];
+		assert.equal(testCalcDerivative(equa), '63x^2+8x^3');
+	});
+	
+	it("Derivative of 21x^3+2x^4", function() {
+		equa = ['2', '1', 'x', '^', '3', '+', '2', 'x', '^', '4', '-', 'x'];
+		assert.equal(testCalcDerivative(equa), '63x^2+8x^3-1');
+	});
+	
+	it("Derivative of 2x^10", function() {
+		equa = ['2', 'x', '^', '1', '0'];
+		assert.equal(testCalcDerivative(equa), '20x^9');
+	});
 });
+
 

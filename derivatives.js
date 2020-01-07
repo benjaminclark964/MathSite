@@ -69,7 +69,6 @@ function testCalcDerivative(inp) {
 			}	
 			
 			results.innerHTML += expression;
-			//expression = [];
 			
 		}
 	}
@@ -160,12 +159,21 @@ function calcDerivativeWithExponent(input) {
 	
 	var output = [];
 	var exponentFlag = false;
+	var firstNumberEndingIndex = 0;
 	
 	var calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
 	output[0] = calc_deriv;
 	var numberLength = output[0];
 	
-	for(let i = String(numberLength).length; i < input.length; i++) {
+	for(let i = 0; i < input.length; i++) {
+		if(!isNaN(input[i])) {
+			firstNumberEndingIndex++;
+		} else {
+			break;
+		}
+	}
+	
+	for(let i = firstNumberEndingIndex; i < input.length; i++) {
 		
 		if(input[i] == '^' && Number(input[i+1]) == 2){
 			
@@ -193,6 +201,8 @@ function getExpression(input, index) {
 	
 	var output = [];
 	var outputIndex = 0;
+	var exponentFlag = false;
+	var exponentNumberflag = false;
 	
 	for(let i = index; i < input.length; i++) {
 		
@@ -212,6 +222,42 @@ function getExpression(input, index) {
 			break;
 			
 		} else {
+			
+			if(input[i-1] == '^' || exponentFlag == true) {
+				
+				if(input[i-1] == '^') {
+					exponentFlag = true;
+				}
+				
+				if(!isNaN(input[i])) {
+					
+					if(output[outputIndex] == undefined) {
+						
+						output[outputIndex] = input[i];
+
+						if(checkIfExponentNumber(input, i) == true) {
+							outputIndex++;
+						}
+						
+					} else {
+						
+						output[outputIndex] += input[i];
+						
+						if(checkIfExponentNumber(input, i) == true) {
+							outputIndex++;
+						}
+						
+					}
+					
+					arrayIndex++;
+					continue;
+					
+				} else {
+					
+					exponentFlag = false;
+					
+				}
+			}
 			
 			output[outputIndex] = input[i];
 			outputIndex++;
@@ -234,6 +280,18 @@ function checkDoesNotEqualOperator(input, index) {
 		
 		flag = true;
 		
+	}
+	
+	return flag;
+}
+
+
+function checkIfExponentNumber(input, index) {
+	
+	let flag = false;
+	
+	if(isNaN(input[index+1])) {
+		flag = true;
 	}
 	
 	return flag;
