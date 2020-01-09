@@ -431,6 +431,21 @@ describe("Derivatives with trigonometry", function() {
 		equa = ['s', 'i', 'n'];
 		assert.equal(testCalcDerivative(equa), 'cos');
 	});
+	
+	it("derivative of cos", function() {
+		equa = ['c', 'o', 's'];
+		assert.equal(testCalcDerivative(equa), '-sin');
+	});
+	
+	it("derivative of -sin", function() {
+		equa = ['-', 's', 'i', 'n'];
+		assert.equal(testCalcDerivative(equa), '-cos');
+	});
+	
+	it("derivative of -cos", function() {
+		equa = ['-', 'c', 'o', 's'];
+		assert.equal(testCalcDerivative(equa), 'sin');
+	});
 });
 
 

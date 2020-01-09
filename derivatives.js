@@ -174,10 +174,15 @@ function calcDerivativeWithExponent(input) {
 	var numberLength = output[0];
 	
 	for(let i = 0; i < input.length; i++) {
+		
 		if(!isNaN(input[i])) {
+			
 			firstNumberEndingIndex++;
+			
 		} else {
+			
 			break;
+			
 		}
 	}
 	
@@ -209,20 +214,32 @@ function calculateDerivativeTrigonometricValues(input) {
 	
 	var output = [];
 	
-	for(let i = 0; i < input.length; i++) {
+	let i = 0;
 		
-		if(input[i] == 's') {
 			
-			if(input[i+1] == 'i' && input[i+2] == 'n') {
-				
-				if(output[0] == undefined) {
-					
-					output[0] = "cos";
-				}
-				
-			}
+		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's') {
+			
+			output[0] = "sin";
+			
 		}
-	}
+		
+		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n') {
+			
+			output[0] = "-cos";
+			
+		}	
+			
+		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n') {
+				
+			output[0] = "cos";
+			
+		}
+		
+		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's') {
+			
+			output[0] = '-sin';
+			
+		}
 	
 	return output;
 }
@@ -235,6 +252,24 @@ function checkForTrig(input) {
 	for(let i = 0; i < input.length; i++) {
 		
 		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n') {
+			
+			flag = 1;
+		}
+		
+		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's') {
+			
+			flag = 1;
+			
+		}
+		
+		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n') {
+			
+			flag = 1;
+			
+		}
+		
+		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's') {
+			
 			flag = 1;
 		}
 	}
@@ -268,7 +303,16 @@ function getExpression(input, index) {
 			output[outputIndex] = input[i];
 			outputIndex++;
 			arrayIndex++;
-			break;
+			
+			if(input[i+1] == 's' || input[i+1] == 'c') {
+				
+				continue;
+				
+			} else {
+				
+				break;
+				
+			}
 			
 		} else {
 			
