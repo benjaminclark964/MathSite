@@ -425,13 +425,13 @@ describe("Basic Derivatives with exponents in the equation", function() {
 });
 
 
-// // Derivatives with fractions
-// describe("Trying to break my code", function() {
-	// it("derivative of 2/3x", function() {
-		// equa = ['2', 'x', '^', '1'];
-		// assert.equal(testCalcDerivative(equa), '2');
-	// });
-// });
+// Derivatives with trigonometry
+describe("Derivatives with trigonometry", function() {
+	it("derivative of sin", function() {
+		equa = ['s', 'i', 'n'];
+		assert.equal(testCalcDerivative(equa), 'cos');
+	});
+});
 
 
 // Tests trying to break my code

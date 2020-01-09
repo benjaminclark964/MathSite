@@ -25,7 +25,11 @@ function calcDerivative(inp) {
 				
 				expression = calcDerivativeWithExponent(expression);
 				
-			} else {
+			} else if(checkForTrig(expression) == true) {
+				
+				expression = calculateDerivativeTrigonometricValues(expression);
+				
+			}else {
 				
 				expression = calcDerivativeEquationWithNoExponent(expression);
 				
@@ -62,7 +66,11 @@ function testCalcDerivative(inp) {
 				
 				expression= calcDerivativeWithExponent(expression);
 				
-			} else {
+			} else if(checkForTrig(expression) == true) {
+				
+				expression = calculateDerivativeTrigonometricValues(expression);
+				
+			}else {
 				
 				expression = calcDerivativeEquationWithNoExponent(expression);
 				
@@ -194,6 +202,44 @@ function calcDerivativeWithExponent(input) {
 	}
 	
 	return output;
+}
+
+
+function calculateDerivativeTrigonometricValues(input) {
+	
+	var output = [];
+	
+	for(let i = 0; i < input.length; i++) {
+		
+		if(input[i] == 's') {
+			
+			if(input[i+1] == 'i' && input[i+2] == 'n') {
+				
+				if(output[0] == undefined) {
+					
+					output[0] = "cos";
+				}
+				
+			}
+		}
+	}
+	
+	return output;
+}
+
+
+function checkForTrig(input) {
+	
+	let flag = 0;
+	
+	for(let i = 0; i < input.length; i++) {
+		
+		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n') {
+			flag = 1;
+		}
+	}
+	
+	return flag;
 }
 
 
