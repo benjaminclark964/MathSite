@@ -425,11 +425,31 @@ describe("Basic Derivatives with exponents in the equation", function() {
 });
 
 
+// // Derivatives with fractions
+// describe("Trying to break my code", function() {
+	// it("derivative of 2/3x", function() {
+		// equa = ['2', 'x', '^', '1'];
+		// assert.equal(testCalcDerivative(equa), '2');
+	// });
+// });
+
+
 // Tests trying to break my code
 describe("Trying to break my code", function() {
+	
 	it("derivative of 2x^1", function() {
 		equa = ['2', 'x', '^', '1'];
 		assert.equal(testCalcDerivative(equa), '2');
+	});
+	
+	it("derivative of 2x^0", function() {
+		equa = ['2', 'x', '^', '0'];
+		assert.equal(testCalcDerivative(equa), '0');
+	});
+	
+	it("derivative of 2x^09", function() {
+		equa = ['2', 'x', '^', '0', '9'];
+		assert.equal(testCalcDerivative(equa), '0');
 	});
 });
 

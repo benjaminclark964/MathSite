@@ -21,7 +21,7 @@ function calcDerivative(inp) {
 			
 			expression = getExpression(input, arrayIndex);
 			
-			if(input.indexOf('^') > -1){
+			if(expression.indexOf('^') > -1){
 				
 				expression = calcDerivativeWithExponent(expression);
 				
@@ -209,6 +209,7 @@ function getExpression(input, index) {
 	for(let i = index; i < input.length; i++) {
 		
 		if(isNaN(input[i]) && checkDoesNotEqualOperator(input, i) != true) {
+			
 			output[outputIndex] = input[i];
 			outputIndex++;
 			arrayIndex++;
@@ -228,8 +229,10 @@ function getExpression(input, index) {
 			if(input[i-1] == '^' || exponentFlag == true) {
 				
 				if(input[i-1] == '^') {
+					
 					exponentFlag = true;
 					exponentIndex = i;
+					
 				}
 				
 				if(!isNaN(input[i])) {
@@ -239,7 +242,9 @@ function getExpression(input, index) {
 						output[outputIndex] = input[i];
 
 						if(checkIfExponentNumber(input, i) == true) {
+							
 							outputIndex++;
+							
 						}
 						
 					} else {
@@ -256,6 +261,7 @@ function getExpression(input, index) {
 					
 					// e.g. 2x^1 wil become 2x
 					output = ifExponentValueIsOne(input, output, exponentIndex);
+					output = ifExponentValueIsZero(output, exponentIndex);
 					
 					continue;
 					
@@ -270,21 +276,32 @@ function getExpression(input, index) {
 			
 			//turning this [2, 0] into this [20]
 			if((String(input[i]).match(/^[0-9]{1}$/) != null && String(input[i+1]).match(/^[0-9]{1}$/) != null) || numberFlag == true) {
+				
 				numberFlag = true;
+				
 				if(output[outputIndex] == undefined) {
+					
 					output[outputIndex] = input[i];
+					
 				} else {
+					
 					output[outputIndex] += input[i];
 				}
 				
 				if(String(input[i+1]).match(/^[0-9]{1}$/) == null) {
+					
 					numberFlag = false;
 					outputIndex++;
+					
 				}
+				
 				arrayIndex++;
 				continue;
+				
 			} else {
+				
 				output[outputIndex] = input[i];
+				
 			}
 			
 			outputIndex++;
@@ -298,15 +315,40 @@ function getExpression(input, index) {
 
 
 function ifExponentValueIsOne(input, output, exponentIndex) {
+	
 	if(output[exponentIndex] == '1' && String(input[exponentIndex+1]).match(/[0-9]/) == null) {
+		
 		for(let i = exponentIndex-1; i < output.length; i++) {
+			
 			if(checkOperator(output, i) == true) {
+				
 				break;
+				
 			} else {
+				
 				delete output[i];
-			}
+				
+			}	
+		}
+	}
+	
+	return output;
+}
+
+
+function ifExponentValueIsZero(output, exponentIndex) {
+	
+	if(output[exponentIndex] == '0') {
+		
+		
+		
+		for(let i = exponentIndex-1; i < exponentIndex+1; i++) {
+			
+			delete output[i];
 			
 		}
+		
+		output[exponentIndex-3] = '0';
 	}
 	
 	return output;
