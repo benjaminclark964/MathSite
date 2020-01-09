@@ -64,7 +64,7 @@ function testCalcDerivative(inp) {
 			
 			if(expression.indexOf('^') > -1){
 				
-				expression= calcDerivativeWithExponent(expression);
+				expression = calcDerivativeWithExponent(expression);
 				
 			} else if(checkForTrig(expression) == true) {
 				
@@ -219,26 +219,55 @@ function calculateDerivativeTrigonometricValues(input) {
 			
 		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's') {
 			
+			if(checkOperator(input, i+4) == true) {
+				
+				output[0] = "sin" + input[i+4];
+				
+			} else {
+				
 			output[0] = "sin";
+			
+			}
 			
 		}
 		
 		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n') {
 			
+			if(checkOperator(input, i+4) == true) {
+				
+				output[0] = "-cos" + input[i+4];
+				
+			} else {
+				
 			output[0] = "-cos";
 			
+			}
 		}	
 			
 		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n') {
+			
+			if(checkOperator(input, i+3) == true) {
+				
+				output[0] = "cos" + input[i+3];
+				
+			} else {
 				
 			output[0] = "cos";
 			
+			}
 		}
 		
 		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's') {
 			
-			output[0] = '-sin';
+			if(checkOperator(input, i+3) == true) {
+				
+				output[0] = "-sin" + input[i+3];
+				
+			} else {
+				
+			output[0] = "-sin";
 			
+			}
 		}
 	
 	return output;
@@ -304,7 +333,7 @@ function getExpression(input, index) {
 			outputIndex++;
 			arrayIndex++;
 			
-			if(input[i+1] == 's' || input[i+1] == 'c') {
+			if((input[i+1] == 's' || input[i+1] == 'c') && input[i] == '-') {	// if expression will be -sin or -cos
 				
 				continue;
 				
