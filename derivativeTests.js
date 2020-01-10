@@ -437,6 +437,11 @@ describe("Derivatives with trigonometry", function() {
 		assert.equal(testCalcDerivative(equa), '-sinx');
 	});
 	
+	it("derivative of tanx", function() {
+		equa = ['t', 'a', 'n', 'x'];
+		assert.equal(testCalcDerivative(equa), 'sec^2x');
+	});
+	
 	it("derivative of -sinx", function() {
 		equa = ['-', 's', 'i', 'n', 'x'];
 		assert.equal(testCalcDerivative(equa), '-cosx');

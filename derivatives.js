@@ -270,6 +270,19 @@ function calculateDerivativeTrigonometricValues(input) {
 			
 			}
 		}
+		
+		if(input[i] == 't' && input[i+1] == 'a' && input[i+2] == 'n' && getVariable(input, i+3) != 0) {
+			
+			if(checkOperator(input, i+4) == true) {
+				
+				output[0] = "sec^2" + input[i+3]+ input[i+4];
+				
+			} else {
+				
+			output[0] = "sec^2" + input[i+3];
+			
+			}
+		}
 	
 	return output;
 }
@@ -300,6 +313,11 @@ function checkForTrig(input) {
 		}
 		
 		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's') {
+			
+			flag = 1;
+		}
+		
+		if(input[i] == 't' && input[i+1] == 'a' && input[i+2] == 'n') {
 			
 			flag = 1;
 		}
