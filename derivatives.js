@@ -213,65 +213,67 @@ function calcDerivativeWithExponent(input) {
 function calculateDerivativeTrigonometricValues(input) {
 	
 	var output = [];
+	let variable = '';
 	
 	let i = 0;
 		
 			
-		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's') {
+		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's' && getVariable(input, i+4) != 0) {
 			
-			if(checkOperator(input, i+4) == true) {
+			if(checkOperator(input, i+5) == true) {
 				
-				output[0] = "sin" + input[i+4];
+				output[0] = "sin" + input[i+4] + input[i+5];
 				
 			} else {
 				
-			output[0] = "sin";
+			output[0] = "sin" + input[i+4];
 			
 			}
 			
 		}
 		
-		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n') {
+		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n' && getVariable(input, i+4) != 0) {
 			
-			if(checkOperator(input, i+4) == true) {
+			if(checkOperator(input, i+5) == true) {
 				
-				output[0] = "-cos" + input[i+4];
+				output[0] = "-cos" + input[i+4] + input[i+5];
 				
 			} else {
 				
-			output[0] = "-cos";
+			output[0] = "-cos" + input[i+4];
 			
 			}
 		}	
 			
-		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n') {
+		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n' && getVariable(input, i+3) != 0) {
 			
-			if(checkOperator(input, i+3) == true) {
+			if(checkOperator(input, i+4) == true) {
 				
-				output[0] = "cos" + input[i+3];
+				output[0] = "cos" + input[i+3] + input[i+4];
 				
 			} else {
 				
-			output[0] = "cos";
+			output[0] = "cos" + input[i+3];
 			
 			}
 		}
 		
-		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's') {
+		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's' && getVariable(input, i+3) != 0) {
 			
-			if(checkOperator(input, i+3) == true) {
+			if(checkOperator(input, i+4) == true) {
 				
-				output[0] = "-sin" + input[i+3];
+				output[0] = "-sin" + input[i+3]+ input[i+4];
 				
 			} else {
 				
-			output[0] = "-sin";
+			output[0] = "-sin" + input[i+3];
 			
 			}
 		}
 	
 	return output;
 }
+
 
 
 function checkForTrig(input) {
@@ -471,6 +473,18 @@ function ifExponentValueIsZero(output, exponentIndex) {
 	}
 	
 	return output;
+}
+
+
+function getVariable(input, index) {
+	
+	let variableIndex = 0;
+		
+		if(checkForVariable(input[index]) == true) {
+			variableIndex = index;
+		}
+	
+	return variableIndex;
 }
 
 

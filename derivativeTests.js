@@ -427,44 +427,44 @@ describe("Basic Derivatives with exponents in the equation", function() {
 
 // Derivatives with trigonometry
 describe("Derivatives with trigonometry", function() {
-	it("derivative of sin", function() {
-		equa = ['s', 'i', 'n'];
-		assert.equal(testCalcDerivative(equa), 'cos');
+	it("derivative of sinx", function() {
+		equa = ['s', 'i', 'n', 'x'];
+		assert.equal(testCalcDerivative(equa), 'cosx');
 	});
 	
-	it("derivative of cos", function() {
-		equa = ['c', 'o', 's'];
-		assert.equal(testCalcDerivative(equa), '-sin');
+	it("derivative of cosx", function() {
+		equa = ['c', 'o', 's', 'x'];
+		assert.equal(testCalcDerivative(equa), '-sinx');
 	});
 	
-	it("derivative of -sin", function() {
-		equa = ['-', 's', 'i', 'n'];
-		assert.equal(testCalcDerivative(equa), '-cos');
+	it("derivative of -sinx", function() {
+		equa = ['-', 's', 'i', 'n', 'x'];
+		assert.equal(testCalcDerivative(equa), '-cosx');
 	});
 	
-	it("derivative of -cos", function() {
-		equa = ['-', 'c', 'o', 's'];
-		assert.equal(testCalcDerivative(equa), 'sin');
+	it("derivative of -cosx", function() {
+		equa = ['-', 'c', 'o', 's' ,'x'];
+		assert.equal(testCalcDerivative(equa), 'sinx');
 	});
 	
-	it("derivative of sin+sin", function() {
-		equa = ['s', 'i', 'n', '+', 's', 'i', 'n'];
-		assert.equal(testCalcDerivative(equa), 'cos+cos');
+	it("derivative of sinx+sinx", function() {
+		equa = ['s', 'i', 'n', 'x', '+', 's', 'i', 'n', 'x'];
+		assert.equal(testCalcDerivative(equa), 'cosx+cosx');
 	});
 	
-	it("derivative of cos+cos", function() {
-		equa = ['c', 'o', 's', '+', 'c', 'o', 's'];
-		assert.equal(testCalcDerivative(equa), '-sin+-sin');
+	it("derivative of cosx+cosx", function() {
+		equa = ['c', 'o', 's', 'x', '+', 'c', 'o', 's', 'x'];
+		assert.equal(testCalcDerivative(equa), '-sinx+-sinx');
 	});
 	
-	it("derivative of -cos+-cos", function() {
-		equa = ['-', 'c', 'o', 's', '+', '-', 'c', 'o', 's'];
-		assert.equal(testCalcDerivative(equa), 'sin+sin');
+	it("derivative of -cosx+-cosx", function() {
+		equa = ['-', 'c', 'o', 's', 'x', '+', '-', 'c', 'o', 's', 'x'];
+		assert.equal(testCalcDerivative(equa), 'sinx+sinx');
 	});
 	
-	it("derivative of -sin+-sin", function() {
-		equa = ['-', 's', 'i', 'n', '+', '-', 's', 'i', 'n'];
-		assert.equal(testCalcDerivative(equa), '-cos+-cos');
+	it("derivative of -sinx+-sinx", function() {
+		equa = ['-', 's', 'i', 'n', 'x', '+', '-', 's', 'i', 'n', 'x'];
+		assert.equal(testCalcDerivative(equa), '-cosx+-cosx');
 	});
 });
 
