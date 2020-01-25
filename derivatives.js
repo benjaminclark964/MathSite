@@ -169,7 +169,14 @@ function calcDerivativeWithExponent(input) {
 	var exponentFlag = false;
 	var firstNumberEndingIndex = 0;
 	
+	//if expression is x^2, will add a "1" to the front
+	if(isNaN(input[0])) {
+		input.unshift("1");
+	} 
+	
 	var calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
+	
+	
 	output[0] = calc_deriv;
 	var numberLength = output[0];
 	
@@ -204,6 +211,57 @@ function calcDerivativeWithExponent(input) {
 			
 		}
 				
+	}
+	
+	
+	//fix this
+	if(isNaN(input[0]) && input.indexOf('^') > -1) {
+		
+		output = calcVariableExponent(input);
+		
+	}
+	
+	return output;
+}
+
+
+//fix this
+function calcVariableExponent(input) {
+	
+	var output = [];
+	var stopIndex = 0;
+	
+	for(let i = 0; i < input.length; i++) {
+		
+		if(input[i] == '^') {
+			
+			stopIndex = i;
+			var outputIndex = 0;
+			var index = i;
+			
+			while(!isNaN(input[index])) {
+				
+				if(output[outputIndex] == undefined) {
+					
+				output[outputIndex] = input[index];
+				
+				} else {
+					
+					output[outputIndex] += input[index];
+					
+				}
+				
+				index++;
+				outputIndex++;
+			}
+			
+			break;
+		}
+	}
+	
+	for(let j = 0; j < stopIndex-1; j++) {
+		
+		output[0] += input[j];
 	}
 	
 	return output;

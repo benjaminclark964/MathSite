@@ -232,6 +232,15 @@ describe("Derivatives of basic equations", function() {
 
 // Tests for basic equations with exponent values
 describe("Basic Derivatives with exponents in the equation", function() {
+	it("Derivative of x^2", function() {
+		equa = ['x', '^', '2'];
+		assert.equal(testCalcDerivative(equa), '2x');
+	});
+	
+	it("Derivative of x^22", function() {
+		equa = ['x', '^', '2', '2'];
+		assert.equal(testCalcDerivative(equa), '22x^21');
+	});
 	
 	it("Derivative of 2x^2", function() {
 		equa = ['2', 'x', '^', '2'];
@@ -421,6 +430,11 @@ describe("Basic Derivatives with exponents in the equation", function() {
 	it("Derivative of 200x + 200 + 20x^20", function() {
 		equa = ['2', '0', '0', 'x', '+', '2' , '0', '0', '+', '2', '0', 'x', '^', '2', '0'];
 		assert.equal(testCalcDerivative(equa), '200+400x^19');
+	});
+	
+	it("Derivative of x^2 + x + y^22", function() {
+		equa = ['x','^','2','+','x','+','y','^','2','2'];
+		assert.equal(testCalcDerivative(equa), '2x+1+22y^21');
 	});
 });
 
