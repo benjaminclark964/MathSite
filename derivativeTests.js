@@ -487,6 +487,30 @@ describe("Derivatives with trigonometry", function() {
 	});
 });
 
+//Tests with parenthesis
+describe("Trying to break my code", function() {
+	
+	it("derivative of (x)", function() {
+		equa = ['(', 'x', ')'];
+		assert.equal(testCalcDerivative(equa), '1');
+	});
+	
+	it("derivative of (2x+2x)", function() {
+		equa = ['(', '2', 'x' ,'+', '2', 'x',')'];
+		assert.equal(testCalcDerivative(equa), '2+2');
+	});
+	
+	it("derivative of (2x)+(2x)", function() {
+		equa = ['(', '2', 'x', ')','+', '(','2', 'x',')'];
+		assert.equal(testCalcDerivative(equa), '2+2');
+	});
+	
+	it("derivative of (2x^2)+(2x^2)", function() {
+		equa = ['(', '2', 'x', '^', '2', ')', '+', '(', '2', 'x', '^', '2', ')'];
+		assert.equal(testCalcDerivative(equa), '4x+4x');
+	});
+});
+
 
 // Tests trying to break my code
 describe("Trying to break my code", function() {

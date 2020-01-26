@@ -497,8 +497,17 @@ function getExpression(input, index) {
 				
 			} else {
 				
-				output[outputIndex] = input[i];
-				
+				//only add if its not a parenthesis
+				if(input[i] != '(' && input[i] != ')') {
+					
+					output[outputIndex] = input[i];
+					
+				} else {
+					
+					arrayIndex++;
+					continue;
+					
+				}
 			}
 			
 			outputIndex++;
