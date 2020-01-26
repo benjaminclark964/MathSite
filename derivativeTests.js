@@ -488,7 +488,7 @@ describe("Derivatives with trigonometry", function() {
 });
 
 //Tests with parenthesis
-describe("Trying to break my code", function() {
+describe("Equations with parenthesis", function() {
 	
 	it("derivative of (x)", function() {
 		equa = ['(', 'x', ')'];
