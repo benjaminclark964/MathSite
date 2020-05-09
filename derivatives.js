@@ -169,7 +169,7 @@ function calcDerivativeWithExponent(input) {
 	var exponentFlag = false;
 	var firstNumberEndingIndex = 0;
 	
-	//if expression is x^2, will add a "1" to the front
+	//if expression is x^2, will add a "1" to the front for multiplication
 	if(isNaN(input[0])) {
 		input.unshift("1");
 	} 
@@ -271,16 +271,16 @@ function calcVariableExponent(input) {
 function calculateDerivativeTrigonometricValues(input) {
 	
 	var output = [];
-	let variable = '';
-	
 	let i = 0;
+	let variable = '';
+	let operator = '';
 		
 		//-cos	
 		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's' && getVariable(input, i+4) != 0) {
-			let variable = input[i+4];
+			variable = input[i+4];
 
 			if(checkOperator(input, i+5) == true) {
-				let operator = input[i+5];
+				operator = input[i+5];
 				output[0] = "sin" + variable + operator;
 				
 			} else {
@@ -293,10 +293,10 @@ function calculateDerivativeTrigonometricValues(input) {
 		
 		//-sin
 		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n' && getVariable(input, i+4) != 0) {
-			let variable = input[i+4];
+			variable = input[i+4];
 
 			if(checkOperator(input, i+5) == true) {
-				let operator = input[i+5];
+				operator = input[i+5];
 				output[0] = "-cos" + variable + operator;
 				
 			} else {
@@ -308,10 +308,10 @@ function calculateDerivativeTrigonometricValues(input) {
 		
 		//sin
 		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n' && getVariable(input, i+3) != 0) {
-			let variable = input[i+3];
+			variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				let operator = input[i+4];
+				operator = input[i+4];
 				output[0] = "cos" + variable + operator;
 				
 			} else {
@@ -323,10 +323,10 @@ function calculateDerivativeTrigonometricValues(input) {
 		
 		//cos
 		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's' && getVariable(input, i+3) != 0) {
-			let variable = input[i+3];
+			variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				let operator = input[i+4];
+				operator = input[i+4];
 				output[0] = "-sin" + variable + operator;
 				
 			} else {
@@ -338,10 +338,10 @@ function calculateDerivativeTrigonometricValues(input) {
 		
 		//tan
 		if(input[i] == 't' && input[i+1] == 'a' && input[i+2] == 'n' && getVariable(input, i+3) != 0) {
-			let variable = input[i+3];
+			variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				let operator = input[i+4];
+				operator = input[i+4];
 				output[0] = "sec^2" + variable + operator;
 				
 			} else {
@@ -353,10 +353,10 @@ function calculateDerivativeTrigonometricValues(input) {
 
 		//csc
 		if(input[i] == 'c' && input[i+1] == 's' && input[i+2] == 'c' && getVariable(input, i+3) != 0) {
-			let variable = input[i+3];
+			variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				let operator = input[i+4];
+				operator = input[i+4];
 				output[0] = "-csc" + variable + " cot" + variable + operator; 
 			} else {
 				output[0] = "-csc" + variable + " cot" + variable;
@@ -365,10 +365,10 @@ function calculateDerivativeTrigonometricValues(input) {
 
 		//cot
 		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 't' && getVariable(input, i+3) != 0) {
-			let variable = input[i+3];
+			variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				let operator = input[i+4];
+				operator = input[i+4];
 				output[0] = "-csc^2" + variable + operator; 
 			} else {
 				output[0] = "-csc^2" + variable;
@@ -377,10 +377,10 @@ function calculateDerivativeTrigonometricValues(input) {
 
 		//sec
 		if(input[i] == 's' && input[i+1] == 'e' && input[i+2] == 'c' && getVariable(input, i+3) != 0) {
-			let variable = input[i+3];
+			variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				let operator = input[i+4];
+				operator = input[i+4];
 				output[0] = "sec" + variable + " tan" + variable + operator; 
 			} else {
 				output[0] = "sec" + variable + " tan" + variable;
@@ -389,8 +389,6 @@ function calculateDerivativeTrigonometricValues(input) {
 	
 	return output;
 }
-
-
 
 function checkForTrig(input) {
 	
