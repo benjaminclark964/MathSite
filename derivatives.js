@@ -277,14 +277,15 @@ function calculateDerivativeTrigonometricValues(input) {
 		
 		//-cos	
 		if(input[i] == '-' && input[i+1] == 'c' && input[i+2] == 'o' && input[i+3] == 's' && getVariable(input, i+4) != 0) {
-			
+			let variable = input[i+4];
+
 			if(checkOperator(input, i+5) == true) {
-				
-				output[0] = "sin" + input[i+4] + input[i+5];
+				let operator = input[i+5];
+				output[0] = "sin" + variable + operator;
 				
 			} else {
 				
-			output[0] = "sin" + input[i+4];
+			output[0] = "sin" + variable;
 			
 			}
 			
@@ -292,56 +293,60 @@ function calculateDerivativeTrigonometricValues(input) {
 		
 		//-sin
 		if(input[i] == '-' && input[i+1] == 's' && input[i+2] == 'i' && input[i+3] == 'n' && getVariable(input, i+4) != 0) {
-			
+			let variable = input[i+4];
+
 			if(checkOperator(input, i+5) == true) {
-				
-				output[0] = "-cos" + input[i+4] + input[i+5];
+				let operator = input[i+5];
+				output[0] = "-cos" + variable + operator;
 				
 			} else {
 				
-			output[0] = "-cos" + input[i+4];
+			output[0] = "-cos" + variable;
 			
 			}
 		}	
 		
 		//sin
 		if(input[i] == 's' && input[i+1] == 'i' && input[i+2] == 'n' && getVariable(input, i+3) != 0) {
-			
+			let variable = input[i+3];
+
 			if(checkOperator(input, i+4) == true) {
-				
-				output[0] = "cos" + input[i+3] + input[i+4];
+				let operator = input[i+4];
+				output[0] = "cos" + variable + operator;
 				
 			} else {
 				
-			output[0] = "cos" + input[i+3];
+			output[0] = "cos" + variable;
 			
 			}
 		}
 		
 		//cos
 		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 's' && getVariable(input, i+3) != 0) {
-			
+			let variable = input[i+3];
+
 			if(checkOperator(input, i+4) == true) {
-				
-				output[0] = "-sin" + input[i+3]+ input[i+4];
+				let operator = input[i+4];
+				output[0] = "-sin" + variable + operator;
 				
 			} else {
 				
-			output[0] = "-sin" + input[i+3];
+			output[0] = "-sin" + variable;
 			
 			}
 		}
 		
 		//tan
 		if(input[i] == 't' && input[i+1] == 'a' && input[i+2] == 'n' && getVariable(input, i+3) != 0) {
-			
+			let variable = input[i+3];
+
 			if(checkOperator(input, i+4) == true) {
-				
-				output[0] = "sec^2" + input[i+3] + input[i+4];
+				let operator = input[i+4];
+				output[0] = "sec^2" + variable + operator;
 				
 			} else {
 				
-			output[0] = "sec^2" + input[i+3];
+			output[0] = "sec^2" + variable;
 			
 			}
 		}
@@ -351,7 +356,8 @@ function calculateDerivativeTrigonometricValues(input) {
 			let variable = input[i+3];
 
 			if(checkOperator(input, i+4) == true) {
-				output[0] = "-csc" + variable + " cot" + variable + input[i+4]; 
+				let operator = input[i+4];
+				output[0] = "-csc" + variable + " cot" + variable + operator; 
 			} else {
 				output[0] = "-csc" + variable + " cot" + variable;
 			}
