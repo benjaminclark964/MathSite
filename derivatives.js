@@ -362,6 +362,30 @@ function calculateDerivativeTrigonometricValues(input) {
 				output[0] = "-csc" + variable + " cot" + variable;
 			}
 		}
+
+		//cot
+		if(input[i] == 'c' && input[i+1] == 'o' && input[i+2] == 't' && getVariable(input, i+3) != 0) {
+			let variable = input[i+3];
+
+			if(checkOperator(input, i+4) == true) {
+				let operator = input[i+4];
+				output[0] = "-csc^2" + variable + operator; 
+			} else {
+				output[0] = "-csc^2" + variable;
+			}
+		}
+
+		//sec
+		if(input[i] == 's' && input[i+1] == 'e' && input[i+2] == 'c' && getVariable(input, i+3) != 0) {
+			let variable = input[i+3];
+
+			if(checkOperator(input, i+4) == true) {
+				let operator = input[i+4];
+				output[0] = "sec" + variable + " tan" + variable + operator; 
+			} else {
+				output[0] = "sec" + variable + " tan" + variable;
+			}
+		}
 	
 	return output;
 }
