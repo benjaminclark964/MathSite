@@ -485,6 +485,21 @@ describe("Derivatives with trigonometry", function() {
 		equa = ['-', 's', 'i', 'n', 'x', '+', '-', 's', 'i', 'n', 'x'];
 		assert.equal(testCalcDerivative(equa), '-cosx+-cosx');
 	});
+	
+	it("derivative of cotx", function() {
+		equa = ['c', 'o', 't', 'x'];
+		assert.equal(testCalcDerivative(equa), '-csc^2x');
+	});
+	
+	it("derivative of cscx", function() {
+		equa = ['c', 's', 'c', 'x'];
+		assert.equal(testCalcDerivative(equa), '-cscx cotx');
+	});
+	
+	it("derivative of secx", function() {
+		equa = ['s', 'e', 'c', 'x'];
+		assert.equal(testCalcDerivative(equa), 'secx tanx');
+	});
 });
 
 //Tests with parenthesis
@@ -528,6 +543,11 @@ describe("Trying to break my code", function() {
 	it("derivative of 2x^09", function() {
 		equa = ['2', 'x', '^', '0', '9'];
 		assert.equal(testCalcDerivative(equa), '0');
+	});
+	
+	it("derivative of xxx", function() {
+		equa = ['x', 'x', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x^3');
 	});
 });
 
