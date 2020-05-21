@@ -1,17 +1,17 @@
 var results = document.getElementById('output');
-var arrayIndex = 0;
+let arrayIndex = 0;
 
 		
 function calcDerivative(inp) {
 	
-	var input = [];
-	var expression = [];
+	let input = [];
+	let expression = [];
 	results.innerHTML = '';
 	input = $(inp).val();
 	
-	if(input.length == 1){
+	if(input.length === 1){
 		
-		calcSingleDigitorLetterDerivative(input);
+		calcSingleDigitOrLetterDerivative(input);
 		
 	} else {
 		
@@ -45,14 +45,14 @@ function calcDerivative(inp) {
 
 function testCalcDerivative(inp) {
 	
-	var input = [];
-	var expression = [];
+	let input = [];
+	let expression = [];
 	results.innerHTML = '';
 	input = inp;
 	
 	if(input.length == 1){
 		
-		calcSingleDigitorLetterDerivative(input);
+		calcSingleDigitOrLetterDerivative(input);
 		
 	} else {
 		
@@ -61,7 +61,7 @@ function testCalcDerivative(inp) {
 		while(arrayIndex < input.length) {
 			
 			expression = getExpression(input, arrayIndex);
-			
+			console.log("I am the expression " + expression);
 			if(expression.indexOf('^') > -1){
 				
 				expression = calcDerivativeWithExponent(expression);
@@ -90,9 +90,9 @@ function testCalcDerivative(inp) {
 
 function assignProperResults() {
 	
-	var check = results.innerHTML;
-	var newString = '';
-	var len = check.length;
+	let check = results.innerHTML;
+	let newString = '';
+	let len = check.length;
 	
 	if(operatorAtTheEndFlag(check, len) == true) {
 		
@@ -132,24 +132,24 @@ function operatorAtTheEndFlag(input, len) {
 }
 
 
-function countExponents(input) {
-	
-	let exponentCount = 0;
-	
-	for(let i = 0; i < input.length; i++) {
-		
-		if(input[i] == '^') {
-			
-			exponentCount++;
-			
-		}
-	}
-	
-	return exponentCount;
-}
+// function countExponents(input) {
+//
+// 	let exponentCount = 0;
+//
+// 	for(let i = 0; i < input.length; i++) {
+//
+// 		if(input[i] == '^') {
+//
+// 			exponentCount++;
+//
+// 		}
+// 	}
+//
+// 	return exponentCount;
+// }
 
 
-function calcSingleDigitorLetterDerivative(input) {
+function calcSingleDigitOrLetterDerivative(input) {
 	
 	if(isNaN(input)){
 		
@@ -164,21 +164,19 @@ function calcSingleDigitorLetterDerivative(input) {
 
 
 function calcDerivativeWithExponent(input) {
-	
-	var output = [];
-	var exponentFlag = false;
-	var firstNumberEndingIndex = 0;
+
+	let output = [];
+	let firstNumberEndingIndex = 0;
 	
 	//if expression is x^2, will add a "1" to the front for multiplication
 	if(isNaN(input[0])) {
 		input.unshift("1");
 	} 
 	
-	var calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
+	let calc_deriv = Number(input[exponentIndex(input)]) * Number(getFirstNumber(input));
 	
 	
 	output[0] = calc_deriv;
-	var numberLength = output[0];
 	
 	for(let i = 0; i < input.length; i++) {
 		
@@ -214,7 +212,7 @@ function calcDerivativeWithExponent(input) {
 	}
 	
 	
-	//fix this
+	//refactor
 	if(isNaN(input[0]) && input.indexOf('^') > -1) {
 		
 		output = calcVariableExponent(input);
@@ -225,19 +223,19 @@ function calcDerivativeWithExponent(input) {
 }
 
 
-//fix this
+//refactor
 function calcVariableExponent(input) {
 	
-	var output = [];
-	var stopIndex = 0;
+	let output = [];
+	let stopIndex = 0;
 	
 	for(let i = 0; i < input.length; i++) {
 		
 		if(input[i] == '^') {
 			
 			stopIndex = i;
-			var outputIndex = 0;
-			var index = i;
+			let outputIndex = 0;
+			let index = i;
 			
 			while(!isNaN(input[index])) {
 				
@@ -269,8 +267,8 @@ function calcVariableExponent(input) {
 
 
 function calculateDerivativeTrigonometricValues(input) {
-	
-	var output = [];
+
+	let output = [];
 	let i = 0;
 	let variable = '';
 	let operator = '';
@@ -449,18 +447,19 @@ function checkForTrig(input) {
 
 
 function getExpression(input, index) {
-	
-	var output = [];
-	var outputIndex = 0;
-	var exponentFlag = false;
-	var exponentNumberflag = false;
-	var numberFlag = false;
-	var exponentIndex = 0;
-	
+
+	let output = [];
+	let outputIndex = 0;
+	let exponentFlag = false;
+	let numberFlag = false;
+	let exponentIndex = 0;
+	let exponentAdded = false;
+	let exponentNum = 0;
+
 	for(let i = index; i < input.length; i++) {
 		
 		if(isNaN(input[i]) && checkDoesNotEqualOperator(input, i) != true) {
-			
+			console.log("2");
 			output[outputIndex] = input[i];
 			outputIndex++;
 			arrayIndex++;
@@ -468,51 +467,53 @@ function getExpression(input, index) {
 			
 		}
 		
-		if(checkOperator(input, i) == true) {
-			
+		if(checkOperator(input, i) === true) {
+			console.log("3");
 			output[outputIndex] = input[i];
 			outputIndex++;
 			arrayIndex++;
-			
+
 			if((input[i+1] == 's' || input[i+1] == 'c') && input[i] == '-') {	// if expression will be -sin or -cos
 				
 				continue;
 				
 			} else {
-				
+				console.log("4");
 				break;
 				
 			}
 			
 		} else {
-			
+			console.log("5");
 			if(input[i-1] == '^' || exponentFlag == true) {
-				
+				console.log("6");
 				if(input[i-1] == '^') {
-					
+					console.log("7");
 					exponentFlag = true;
 					exponentIndex = i;
 					
 				}
 				
 				if(!isNaN(input[i])) {
-					
+					console.log("8");
 					if(output[outputIndex] == undefined) {
-						
+						console.log("9");
 						output[outputIndex] = input[i];
 
 						if(checkIfExponentNumber(input, i) == true) {
-							
+							console.log("10");
 							outputIndex++;
 							
 						}
 						
 					} else {
-						
+						console.log("11");
 						output[outputIndex] += input[i];
 						
 						if(checkIfExponentNumber(input, i) == true) {
+							console.log("12");
 							outputIndex++;
+
 						}
 						
 					}
@@ -522,11 +523,11 @@ function getExpression(input, index) {
 					// e.g. 2x^1 wil become 2x
 					output = ifExponentValueIsOne(input, output, exponentIndex);
 					output = ifExponentValueIsZero(output, exponentIndex);
-					
+					console.log("13");
 					continue;
 					
 				} else {
-					
+					console.log("14");
 					exponentFlag = false;
 					
 					
@@ -535,38 +536,72 @@ function getExpression(input, index) {
 			}
 			
 			//turning this [2, 0] into this [20]
-			if((String(input[i]).match(/^[0-9]{1}$/) != null && String(input[i+1]).match(/^[0-9]{1}$/) != null) || numberFlag == true) {
-				
+			if((String(input[i]).match(/^[0-9]{1}$/) != null && String(input[i+1]).match(/^[0-9]{1}$/) != null) 
+			|| numberFlag == true) {
+				console.log("15");
 				numberFlag = true;
 				
 				if(output[outputIndex] == undefined) {
-					
+					console.log("16");
 					output[outputIndex] = input[i];
 					
 				} else {
-					
+					console.log("17");
 					output[outputIndex] += input[i];
 				}
 				
 				if(String(input[i+1]).match(/^[0-9]{1}$/) == null) {
-					
+					console.log("18");
 					numberFlag = false;
 					outputIndex++;
 					
 				}
-				
+				console.log("19");
 				arrayIndex++;
 				continue;
 				
 			} else {
-				
+				console.log("20");
 				//only add if its not a parenthesis
 				if(input[i] != '(' && input[i] != ')') {
-					
+					console.log("21");
+					if(isNaN(input[i])) {
+
+						for(let k = i; k < input.length; k++) {
+							console.log(input);
+							if(input[k] === input[i+1] && exponentAdded === false) {
+
+								exponentNum = 2;
+
+								for(let v = k+1; v < input.length; v++) {
+									console.log("I am input " + input);
+
+									if(input[v] === input[v+1]) {
+										console.log("I am here");
+										exponentNum++;
+									}
+
+								}
+
+								console.log("I am exponent number " + exponentNum);
+								input[k+1] = '^';
+								exponentAdded = true;
+								input[i+2] = exponentNum;
+
+							} else if(exponentAdded === true && checkOperator(input, k) === true) {
+								console.log("I work");
+							} else {
+								exponentNum = 0
+								break;
+							}
+
+						}
+					}
+					console.log(input);
 					output[outputIndex] = input[i];
 					
 				} else {
-					
+					console.log("22");
 					arrayIndex++;
 					continue;
 					
@@ -609,8 +644,6 @@ function ifExponentValueIsZero(output, exponentIndex) {
 	
 	if(output[exponentIndex] == '0') {
 		
-		
-		
 		for(let i = exponentIndex-1; i < exponentIndex+1; i++) {
 			
 			delete output[i];
@@ -637,8 +670,8 @@ function getVariable(input, index) {
 
 
 function checkDoesNotEqualOperator(input, index) {
-	
-	var flag = false;
+
+	let flag = false;
 	
 	if(input[index] != '+'
 	|| input[index] != '-'
@@ -666,11 +699,10 @@ function checkIfExponentNumber(input, index) {
 
 
 function calcDerivativeEquationWithNoExponent(input) {
-	
-	var output = [];
-	var variableFlag = false;
-	var operatorFlag = false;
-	var variableInBetweenFlag = false;
+
+	let output = [];
+	let variableFlag = false;
+	let operatorFlag = false;
 	
 	for(let i = 0; i < input.length; i++) {
 		
@@ -780,8 +812,8 @@ return output;
 
 
 function checkIfEndOfLine(input, index) {
-	
-	var flag = false;
+
+	let flag = false;
 	
 	if(index == input.length-1) {
 		
@@ -793,7 +825,7 @@ function checkIfEndOfLine(input, index) {
 }
 
 function checkOperator(input, index) {
-	var flag = false;
+	let flag = false;
 	
 	if(input[index] == '+' 
 	|| input[index] == '-' 
@@ -875,8 +907,8 @@ function checkForVariable(input) {
 
 
 function getFirstNumber(input) {
-	
-	var output = [];
+
+	let output = [];
 	
 	for(let i = 0; i < input.length; i++) {
 		
@@ -902,18 +934,18 @@ function getFirstNumber(input) {
 }
 
 
-function checkSingleVariableInEquation(input, index) {
-	
-	let flag = false;
-	
-	if(isNaN(input[index-1])) {
-		
-		let flag = true;
-		
-	}
-	
-	return flag;
-}
+// function checkSingleVariableInEquation(input, index) {
+//
+// 	let flag = false;
+//
+// 	if(isNaN(input[index-1])) {
+//
+// 		let flag = true;
+//
+// 	}
+//
+// 	return flag;
+// }
 
 
 function exponentIndex(input) {
@@ -950,9 +982,9 @@ function exponentIndex(input) {
 
 
 function delimitSpaces(input) {
-	
-	var output = [];
-	var index = 0;
+
+	let output = [];
+	let index = 0;
 	
 	for(let i = 0; i < input.length; i++) {
 		
