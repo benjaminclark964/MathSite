@@ -580,7 +580,7 @@ function getExpression(input, index) {
 									} else {
 
 										break;
-										
+
 									}
 
 								}
@@ -591,6 +591,14 @@ function getExpression(input, index) {
 								}
 
 								//console.log("I am exponent number " + exponentNum);
+								if(exponentNum > 3) {
+									let removedDuplicates = 0;
+									while(removedDuplicates != exponentNum-3) {
+										input.shift();
+										removedDuplicates++;
+									}
+								}
+
 								input[k+1] = '^';
 								exponentAdded = true;
 								input[i+2] = exponentNum.toString();

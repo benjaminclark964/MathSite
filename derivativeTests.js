@@ -538,6 +538,16 @@ describe("Duplicate variables next to each other", function() {
 		assert.equal(testCalcDerivative(equa), '3x^2');
 	});
 
+	it("derivative of xxxx", function() {
+		equa = ['x', 'x', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '4x^3');
+	});
+
+	it("derivative of xxxxx", function() {
+		equa = ['x', 'x', 'x', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '5x^4');
+	});
+
 	it("derivative of xx + 2x", function() {
 		equa = ['x', 'x', '+', '2', 'x'];
 		assert.equal(testCalcDerivative(equa), '2x+2');
@@ -571,6 +581,11 @@ describe("Duplicate variables next to each other", function() {
 	it("derivative of xx + xx + xx", function() {
 		equa = ['x', 'x', '+', 'x', 'x', '+', 'x', 'x'];
 		assert.equal(testCalcDerivative(equa), '2x+2x+2x');
+	});
+
+	it("derivative of xxxxx + xxxxx", function() {
+		equa = ['x', 'x', 'x', 'x', 'x', '+', 'x', 'x', 'x', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '5x^4+5x^4');
 	});
 })
 
