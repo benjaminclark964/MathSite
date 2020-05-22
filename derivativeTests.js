@@ -563,6 +563,11 @@ describe("Duplicate variables next to each other", function() {
 		assert.equal(testCalcDerivative(equa), '3y^2+2');
 	});
 
+	it("derivative of xx + xx", function() {
+		equa = ['x', 'x', '+', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '2x+2x');
+	});
+
 	it("derivative of xx + xx + xx", function() {
 		equa = ['x', 'x', '+', 'x', 'x', '+', 'x', 'x'];
 		assert.equal(testCalcDerivative(equa), '2x+2x+2x');

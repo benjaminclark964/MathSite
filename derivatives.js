@@ -577,6 +577,10 @@ function getExpression(input, index) {
 									if(input[v] === input[v+1]) {
 										console.log("I am here");
 										exponentNum++;
+									} else {
+
+										break;
+										
 									}
 
 								}
