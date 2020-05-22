@@ -445,7 +445,7 @@ function checkForTrig(input) {
 	return flag;
 }
 
-
+//REFACTOR THIS!!!
 function getExpression(input, index) {
 
 	let output = [];
@@ -529,8 +529,7 @@ function getExpression(input, index) {
 				} else {
 					console.log("14");
 					exponentFlag = false;
-					
-					
+
 				}
 				
 			}
@@ -574,7 +573,6 @@ function getExpression(input, index) {
 								exponentNum = 2;
 
 								for(let v = k+1; v < input.length; v++) {
-									console.log("I am input " + input);
 
 									if(input[v] === input[v+1]) {
 										console.log("I am here");
@@ -583,13 +581,19 @@ function getExpression(input, index) {
 
 								}
 
-								console.log("I am exponent number " + exponentNum);
+								if(exponentNum === 2 && checkOperator(input, i+2) == true) {
+									input = addASpaceInMiddleOfArray(input, i);
+									arrayIndex--;
+								}
+
+								//console.log("I am exponent number " + exponentNum);
 								input[k+1] = '^';
 								exponentAdded = true;
-								input[i+2] = exponentNum;
+								input[i+2] = exponentNum.toString();
+								//console.log("I am input " + input);
 
 							} else if(exponentAdded === true && checkOperator(input, k) === true) {
-								console.log("I work");
+								break;
 							} else {
 								exponentNum = 0
 								break;
@@ -597,7 +601,7 @@ function getExpression(input, index) {
 
 						}
 					}
-					console.log(input);
+					console.log("I am input " + input);
 					output[outputIndex] = input[i];
 					
 				} else {
@@ -613,7 +617,43 @@ function getExpression(input, index) {
 			
 		}
 	}
-	
+	console.log("expression output " + output);
+	return output;
+}
+
+
+function addASpaceInMiddleOfArray(input, index) {
+	let output = [];
+	let outputIndex = 0;
+
+	if(isNaN(input[index]) && input[index] === input[index+1] && input[index] !== input[index+2]) {
+
+		while(outputIndex < index+2) {
+			if (output[outputIndex] == undefined) {
+				output[outputIndex] = input[index];
+			} else {
+				output[outputIndex] += input[index];
+			}
+			outputIndex++;
+		}
+
+		output[outputIndex] = '';
+		outputIndex++;
+
+		output[outputIndex] = input[index+2];
+		outputIndex++;
+
+		for(let k = index+3; k < input.length; k++) {
+			if(output[outputIndex] == undefined) {
+				output[outputIndex] = input[k];
+			} else {
+				output[outputIndex] += input[k];
+			}
+			outputIndex++;
+		}
+	}
+
+	console.log("I am final output " + output);
 	return output;
 }
 

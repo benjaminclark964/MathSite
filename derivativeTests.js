@@ -527,7 +527,7 @@ describe("Equations with parenthesis", function() {
 });
 
 //Tests with duplicate variables next to each other
-describe("Duplicate variables next to ech other", function() {
+describe("Duplicate variables next to each other", function() {
 	it("derivative of xx", function() {
 		equa = ['x', 'x'];
 		assert.equal(testCalcDerivative(equa), '2x');
@@ -537,12 +537,42 @@ describe("Duplicate variables next to ech other", function() {
 		equa = ['x', 'x', 'x'];
 		assert.equal(testCalcDerivative(equa), '3x^2');
 	});
+
+	it("derivative of xx + 2x", function() {
+		equa = ['x', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '2x+2');
+	});
+
+	it("derivative of 2x + xx + 2x", function() {
+		equa = ['2', 'x', '+', 'x', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+2x+2');
+	});
+
+	it("derivative of 2x + xx", function() {
+		equa = ['2', 'x', '+', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '2+2x');
+	});
+
+	it("derivative of xxx + 2x", function() {
+		equa = ['x', 'x', 'x', '+', '2', 'x'];
+		assert.equal(testCalcDerivative(equa), '3x^2+2');
+	});
+
+	it("derivative of yyy + 2y", function() {
+		equa = ['y', 'y', 'y', '+', '2', 'y'];
+		assert.equal(testCalcDerivative(equa), '3y^2+2');
+	});
+
+	it("derivative of xx + xx + xx", function() {
+		equa = ['x', 'x', '+', 'x', 'x', '+', 'x', 'x'];
+		assert.equal(testCalcDerivative(equa), '2x+2x+2x');
+	});
 })
 
 
 // Tests trying to break my code
 describe("Trying to break my code", function() {
-	
+
 	it("derivative of 2x^1", function() {
 		equa = ['2', 'x', '^', '1'];
 		assert.equal(testCalcDerivative(equa), '2');
